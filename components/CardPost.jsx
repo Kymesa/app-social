@@ -1,16 +1,14 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Icon, Image } from "react-native-magnus";
 
-export default function CardPost({
-  name,
-  descripcion,
-  date,
-  urlPost,
-  urlPerfil,
-}) {
+const CardPost = ({ name, descripcion, date, urlPost, urlPerfil }) => {
+  const [love, setLove] = useState(false);
+  const handleClickLike = () => {
+    setLove(!love);
+  };
   return (
-    <>
+    <View style={{ marginBottom: 15 }}>
       <View
         style={{
           marginLeft: 15,
@@ -87,6 +85,68 @@ export default function CardPost({
           }}
         />
       </View>
-    </>
+      <View
+        style={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "row",
+          marginHorizontal: 20,
+          marginVertical: 10,
+        }}
+      >
+        <View
+          style={{
+            alignContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <TouchableOpacity onPress={handleClickLike}>
+            <Icon
+              mr={5}
+              name="heart"
+              color={love ? "red500" : "gray500"}
+              fontSize="5xl"
+              fontFamily="AntDesign"
+            />
+          </TouchableOpacity>
+
+          <Text style={{ color: "gray" }}>2056</Text>
+        </View>
+        <View
+          style={{
+            alignContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <Icon
+            name="comment"
+            color="gray500"
+            fontSize="5xl"
+            fontFamily="FontAwesome"
+          />
+
+          <Text style={{ color: "gray", marginLeft: 10 }}>645</Text>
+        </View>
+        <View
+          style={{
+            alignContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+          }}
+        >
+          <Icon
+            mr={5}
+            name="share"
+            color="gray500"
+            fontSize="5xl"
+            fontFamily="FontAwesome"
+          />
+          <Text style={{ color: "gray" }}>347</Text>
+        </View>
+      </View>
+    </View>
   );
-}
+};
+export default CardPost;
