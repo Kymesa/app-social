@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { Image } from "react-native-magnus";
+import { Icon, Image, Input } from "react-native-magnus";
 
 const Whats = () => {
   return (
@@ -24,6 +24,14 @@ const Whats = () => {
       <Text style={{ fontWeight: "bold", fontSize: 15 }}>
         What's on your head?
       </Text>
+      {/* <Input
+        w="75%"
+        fontWeight="bold"
+        placeholderTextColor="black"
+        placeholder="What's On Your Head"
+        focusBorderColor="white"
+        borderColor="white"
+      /> */}
     </View>
   );
 };
