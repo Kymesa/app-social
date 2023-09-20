@@ -26,7 +26,7 @@ export default function History() {
       perfilUrl:
         "https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=600",
       historyUrl:
-        "https://cdn.pixabay.com/photo/2019/07/09/08/03/boy-4326461_640.jpg",
+        "https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
       perfilUrl:
@@ -66,7 +66,7 @@ export default function History() {
     },
   ];
   return (
-    <View style={{ marginLeft: 10, marginTop: 25 }}>
+    <View style={{ marginLeft: 5, marginTop: 25 }}>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

@@ -8,10 +8,10 @@ export default function Layout() {
       <Tabs.Screen
         name="index"
         options={{
-          headerRightContainerStyle: { marginRight: 25 },
           headerLeftContainerStyle: { marginLeft: 5 },
           headerRight: () => (
             <Icon
+              mr={20}
               name="search"
               color="black"
               fontSize="6xl"
