@@ -1,5 +1,4 @@
 import { Tabs } from "expo-router/tabs";
-import { StyleSheet } from "react-native";
 import { Icon, Image } from "react-native-magnus";
 
 export default function Layout() {
@@ -92,9 +91,3 @@ export default function Layout() {
     </Tabs>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 10,
-  },
-});
