@@ -81,7 +81,6 @@ const Online = () => {
             w={12}
           >
             <Image
-              // ml="md"
               h={70}
               w={70}
               mr={20}
