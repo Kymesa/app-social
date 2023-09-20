@@ -2,6 +2,8 @@ import { View, Text, ScrollView, SafeAreaView } from "react-native";
 import React from "react";
 import { Whats } from "../components/Whats";
 import { Todo } from "../components/Todo";
+import Online from "../components/Online";
+import History from "../components/History";
 export default function Feed() {
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
@@ -13,6 +15,8 @@ export default function Feed() {
         <View>
           <Whats />
           <Todo />
+          <Online />
+          <History />
         </View>
       </ScrollView>
     </SafeAreaView>

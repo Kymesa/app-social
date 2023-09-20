@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { Icon } from "react-native-magnus";
 
@@ -14,7 +14,7 @@ const Todo = () => {
         gap: 10,
       }}
     >
-      <View
+      <TouchableOpacity
         style={{
           backgroundColor: "#F7F3F3",
           paddingHorizontal: 25,
@@ -42,8 +42,8 @@ const Todo = () => {
 
           <Text style={{ fontWeight: "bold" }}> Live </Text>
         </View>
-      </View>
-      <View
+      </TouchableOpacity>
+      <TouchableOpacity
         style={{
           backgroundColor: "#F7F3F3",
           paddingHorizontal: 25,
@@ -71,8 +71,8 @@ const Todo = () => {
 
           <Text style={{ fontWeight: "bold" }}> Phone </Text>
         </View>
-      </View>
-      <View
+      </TouchableOpacity>
+      <TouchableOpacity
         style={{
           backgroundColor: "#F7F3F3",
           paddingHorizontal: 25,
@@ -100,7 +100,7 @@ const Todo = () => {
 
           <Text style={{ fontWeight: "bold" }}> Room </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

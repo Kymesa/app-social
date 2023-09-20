@@ -18,6 +18,7 @@ export default function Layout() {
               fontFamily="FontAwesome"
             />
           ),
+          headerTintColor: "rgba(215,121,255,1)",
           title: "Friendy",
           tabBarLabel: "Feed",
           tabBarIcon: () => (
