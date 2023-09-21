@@ -1,10 +1,24 @@
 import { Tabs } from "expo-router/tabs";
 import { Icon, Image } from "react-native-magnus";
 import { BtnHeaderScreen } from "../components/BtnHeader/BtnHeaderScreen";
-import { TouchableOpacity } from "react-native";
 export default function Layout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: "white",
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 20,
+        },
+        tabBarLabelStyle: {
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: 12,
+        },
+        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: "black",
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -31,12 +45,12 @@ export default function Layout() {
           tabBarLabel: "Feed",
           tabBarIcon: () => (
             <Icon
-              name="dehaze"
-              color="pink600"
+              name="home"
+              color="black"
               fontSize={32}
               h={40}
               w={40}
-              fontFamily="MaterialIcons"
+              fontFamily="AntDesign"
               rounded="md"
             />
           ),
@@ -53,6 +67,7 @@ export default function Layout() {
           headerTitleAlign: "center",
           headerTitleStyle: {
             fontWeight: "bold",
+            fontSize: 24,
           },
           tabBarIcon: () => (
             <Icon
@@ -84,7 +99,23 @@ export default function Layout() {
           ),
         }}
       />
-
+      <Tabs.Screen
+        name="Messages"
+        options={{
+          headerTitleAlign: "center",
+          tabBarIcon: () => (
+            <Icon
+              name="message-square"
+              color="black"
+              fontSize={32}
+              h={40}
+              w={40}
+              fontFamily="Feather"
+              rounded="md"
+            />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="Notications"
         options={{
