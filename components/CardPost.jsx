@@ -72,7 +72,14 @@ const CardPost = ({ name, descripcion, date, urlPost, urlPerfil }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <Text style={{ marginHorizontal: 10, marginLeft: 15 }}>
+      <Text
+        style={{
+          marginVertical: 10,
+          width: "80%",
+          marginHorizontal: 20,
+          lineHeight: 25,
+        }}
+      >
         {descripcion}
         {/* <Text style={{ color: "blue" }}> https://www.ejemplo.com</Text> */}
       </Text>

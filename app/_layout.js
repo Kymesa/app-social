@@ -1,20 +1,29 @@
 import { Tabs } from "expo-router/tabs";
 import { Icon, Image } from "react-native-magnus";
-
+import { BtnHeaderScreen } from "../components/BtnHeader/BtnHeaderScreen";
+import { TouchableOpacity } from "react-native";
 export default function Layout() {
   return (
     <Tabs>
       <Tabs.Screen
         name="index"
         options={{
+          headerShadowVisible: false,
           headerLeftContainerStyle: { marginLeft: 5 },
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 26,
+          },
           headerRight: () => (
             <Icon
-              mr={20}
+              mr={15}
               name="search"
               color="black"
-              fontSize="6xl"
+              fontSize={25}
+              h={40}
+              w={40}
               fontFamily="FontAwesome"
+              rounded="md"
             />
           ),
           headerTintColor: "rgba(215,121,255,1)",
@@ -23,9 +32,37 @@ export default function Layout() {
           tabBarIcon: () => (
             <Icon
               name="dehaze"
-              color="purple"
-              fontSize="6xl"
+              color="pink600"
+              fontSize={32}
+              h={40}
+              w={40}
               fontFamily="MaterialIcons"
+              rounded="md"
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Music"
+        options={{
+          headerShadowVisible: false,
+          title: "Music",
+          headerLeft: () => <BtnHeaderScreen name="cog" />,
+          headerRight: () => <BtnHeaderScreen name="search" />,
+          tabBarLabel: "Music",
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+          tabBarIcon: () => (
+            <Icon
+              name="music"
+              fontFamily="Foundation"
+              fontSize={32}
+              color="black"
+              h={40}
+              w={40}
+              rounded="md"
             />
           ),
         }}
@@ -37,27 +74,17 @@ export default function Layout() {
           tabBarIcon: () => (
             <Icon
               name="people"
-              color="gray"
-              fontSize="6xl"
+              color="black"
+              h={40}
+              w={40}
+              fontSize={32}
               fontFamily="Ionicons"
+              rounded="md"
             />
           ),
         }}
       />
-      <Tabs.Screen
-        name="Messages"
-        options={{
-          headerTitleAlign: "center",
-          tabBarIcon: () => (
-            <Icon
-              name="message-square"
-              color="gray"
-              fontSize="6xl"
-              fontFamily="Feather"
-            />
-          ),
-        }}
-      />
+
       <Tabs.Screen
         name="Notications"
         options={{
@@ -65,9 +92,12 @@ export default function Layout() {
           tabBarIcon: () => (
             <Icon
               name="notifications"
-              color="gray"
-              fontSize="6xl"
+              color="black"
+              fontSize={32}
+              h={40}
+              w={40}
               fontFamily="Ionicons"
+              rounded="md"
             />
           ),
         }}
