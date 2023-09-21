@@ -71,8 +71,8 @@ export default function Layout() {
           },
           tabBarIcon: () => (
             <Icon
-              name="music"
-              fontFamily="Foundation"
+              name="musical-notes-outline"
+              fontFamily="Ionicons"
               fontSize={32}
               color="black"
               h={40}
@@ -88,7 +88,7 @@ export default function Layout() {
           headerTitleAlign: "center",
           tabBarIcon: () => (
             <Icon
-              name="people"
+              name="people-outline"
               color="black"
               h={40}
               w={40}
@@ -122,7 +122,7 @@ export default function Layout() {
           headerTitleAlign: "center",
           tabBarIcon: () => (
             <Icon
-              name="notifications"
+              name="notifications-outline"
               color="black"
               fontSize={32}
               h={40}
