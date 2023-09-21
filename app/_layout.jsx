@@ -105,12 +105,12 @@ export default function Layout() {
           headerTitleAlign: "center",
           tabBarIcon: () => (
             <Icon
-              name="message-square"
+              name="message1"
               color="black"
-              fontSize={32}
+              fontSize={30}
               h={40}
               w={40}
-              fontFamily="Feather"
+              fontFamily="AntDesign"
               rounded="md"
             />
           ),
