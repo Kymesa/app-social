@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router/tabs";
 import { Icon, Image } from "react-native-magnus";
 import { BtnHeaderScreen } from "../components/BtnHeader/BtnHeaderScreen";
+import BtnHeaderMaps from "../components/BtnHeader/BtnHeaderMaps";
 export default function Layout() {
   return (
     <Tabs
@@ -83,6 +84,28 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name="Maps"
+        options={{
+          headerTitleContainerStyle: { marginTop: 30 },
+          title: "Your Locations",
+          tabBarLabel: "Maps",
+          headerTitleAlign: "center",
+          headerTransparent: true,
+          tabBarIcon: () => (
+            <Icon
+              name="map-pin"
+              color="black"
+              fontSize={30}
+              h={40}
+              w={40}
+              fontFamily="Feather"
+              rounded="md"
+            />
+          ),
+          headerLeft: () => <BtnHeaderMaps />,
+        }}
+      />
+      <Tabs.Screen
         name="Peoples"
         options={{
           headerTitleAlign: "center",
@@ -111,23 +134,6 @@ export default function Layout() {
               h={40}
               w={40}
               fontFamily="AntDesign"
-              rounded="md"
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Notications"
-        options={{
-          headerTitleAlign: "center",
-          tabBarIcon: () => (
-            <Icon
-              name="notifications-outline"
-              color="black"
-              fontSize={32}
-              h={40}
-              w={40}
-              fontFamily="Ionicons"
               rounded="md"
             />
           ),
