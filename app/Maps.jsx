@@ -218,19 +218,19 @@ export default function Maps() {
   async function getLocation() {
     let { status } = await Location.requestForegroundPermissionsAsync({});
     if (status !== "granted") {
-      alert("Permission to access location was denied");
+      alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!");
       return;
     }
-    // setInitialRegion({
-    //   latitude: 10.476713507755939,
-    //   longitude: -73.24236273765565,
-    //   latitudeDelta: 0.03,
-    //   longitudeDelta: 0.03,
-    // });
-    // setMarkers({
-    //   latitude: 10.476713507755939,
-    //   longitude: -73.24236273765565,
-    // });
+    setInitialRegion({
+      latitude: 10.476713507755939,
+      longitude: -73.24236273765565,
+      latitudeDelta: 0.03,
+      longitudeDelta: 0.03,
+    });
+    setMarkers({
+      latitude: 10.476713507755939,
+      longitude: -73.24236273765565,
+    });
 
     let locationGet = await Location.getCurrentPositionAsync({});
     setInitialRegion({
@@ -243,30 +243,6 @@ export default function Maps() {
       latitude: locationGet.coords.latitude,
       longitude: locationGet.coords.longitude,
     });
-
-    // if (locationGet == null) {
-    //   setInitialRegion({
-    //     latitude: 16.852437466660895,
-    //     longitude: -99.91198539733888,
-    //     latitudeDelta: 0.04,
-    //     longitudeDelta: 0.04,
-    //   });
-    //   setMarkers({
-    //     latitude: 16.852437466660895,
-    //     longitude: -99.91198539733888,
-    //   });
-    // } else {
-    //   setInitialRegion({
-    //     latitude: locationGet.coords.latitude,
-    //     longitude: locationGet.coords.longitude,
-    //     latitudeDelta: 0.04,
-    //     longitudeDelta: 0.04,
-    //   });
-    //   setMarkers({
-    //     latitude: locationGet.coords.latitude,
-    //     longitude: locationGet.coords.longitude,
-    //   });
-    // }
   }
   useEffect(() => {
     getLocation();
@@ -291,7 +267,6 @@ export default function Maps() {
         break;
     }
   };
-
   return (
     <>
       <View style={{ flex: 1 }}>
