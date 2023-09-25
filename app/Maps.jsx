@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   widthPercentageToDP as wp,
@@ -356,9 +349,7 @@ export default function Maps() {
               customMapStyle={styleMap}
               showsCompass={false}
               loadingIndicatorColor="red"
-              // showsTraffic={true}
               loadingEnabled={true}
-              // zoomEnabled={true}
               provider={PROVIDER_GOOGLE}
               initialRegion={initialRegion}
               style={{ width: wp(100), height: hp(100) }}
@@ -468,7 +459,7 @@ const styles = StyleSheet.create({
   map: {
     height: "100%",
   },
-  // Callout bubble
+
   bubble: {
     flexDirection: "column",
     alignSelf: "flex-start",
@@ -479,7 +470,7 @@ const styles = StyleSheet.create({
     padding: 15,
     width: 150,
   },
-  // Arrow below the bubble
+
   arrow: {
     backgroundColor: "transparent",
     borderColor: "transparent",
@@ -497,24 +488,13 @@ const styles = StyleSheet.create({
     marginTop: -0.5,
     // marginBottom: -15
   },
-  // Character name
   name: {
     fontSize: 16,
     marginBottom: 5,
   },
-  // Character image
+
   image: {
     width: 100,
     height: 100,
-    // position: "absolute",
   },
 });
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   map: {
-//     width: "100%",
-//     height: "100%",
-//   },
-// });
