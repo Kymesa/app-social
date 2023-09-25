@@ -51,9 +51,10 @@ export default function Maps() {
       iconFamly: "FontAwesome5",
     },
   ];
-  const [location, setLocation] = useState(null);
+
   const [initialRegion, setInitialRegion] = useState(null);
   const [markers, setMarkers] = useState(null);
+  const [inputText, setInputText] = useState("");
   const styleMap = [
     {
       elementType: "geometry",
@@ -294,206 +295,226 @@ export default function Maps() {
       alert("Permission to access location was denied");
       return;
     }
+    setInitialRegion({
+      latitude: 10.476713507755939,
+      longitude: -73.24236273765565,
+      latitudeDelta: 0.04,
+      longitudeDelta: 0.04,
+    });
+    setMarkers({
+      latitude: 10.476713507755939,
+      longitude: -73.24236273765565,
+    });
 
     let locationGet = await Location.getCurrentPositionAsync({});
-    // setLocation(locationGet);
-    console.log(locationGet);
     setInitialRegion({
       latitude: locationGet.coords.latitude,
       longitude: locationGet.coords.longitude,
-      latitudeDelta: 0.009,
-      longitudeDelta: 0.004,
+      latitudeDelta: 0.04,
+      longitudeDelta: 0.04,
     });
-    //  setMarkers({
-    //   latitude: locationGet.coords.latitude,
-    //   longitude: locationGet.coords.longitude,
-    // });
+    setMarkers({
+      latitude: locationGet.coords.latitude,
+      longitude: locationGet.coords.longitude,
+    });
+    console.log("LOCATION GET PERMIS: " + locationGet);
+
+    // if (locationGet == null) {
+    //   setInitialRegion({
+    //     latitude: 16.852437466660895,
+    //     longitude: -99.91198539733888,
+    //     latitudeDelta: 0.04,
+    //     longitudeDelta: 0.04,
+    //   });
+    //   setMarkers({
+    //     latitude: 16.852437466660895,
+    //     longitude: -99.91198539733888,
+    //   });
+    // } else {
+    //   setInitialRegion({
+    //     latitude: locationGet.coords.latitude,
+    //     longitude: locationGet.coords.longitude,
+    //     latitudeDelta: 0.04,
+    //     longitudeDelta: 0.04,
+    //   });
+    //   setMarkers({
+    //     latitude: locationGet.coords.latitude,
+    //     longitude: locationGet.coords.longitude,
+    //   });
+    // }
   }
   useEffect(() => {
-    console.log("HOLA1");
     getLocation();
-    console.log("HOLA2");
   }, []);
 
-  // let text = "Waiting..";
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   console.log(location);
-  //   text = JSON.stringify(location);
-  // }
   return (
     <>
-      <View style={styles.container}>
-        {initialRegion ? (
-          <MapView initialRegion={initialRegion} style={styles.map} />
-        ) : (
-          <MapView style={styles.map} />
+      <View style={{ flex: 1 }}>
+        {initialRegion && markers && (
+          <>
+            <MapView
+              customMapStyle={styleMap}
+              showsCompass={false}
+              loadingIndicatorColor="red"
+              // showsTraffic={true}
+              loadingEnabled={true}
+              // zoomEnabled={true}
+              provider={PROVIDER_GOOGLE}
+              initialRegion={initialRegion}
+              style={{ width: wp(100), height: hp(100) }}
+            >
+              <Marker
+                coordinate={markers}
+                title="test-title"
+                description="test-descripcion"
+              >
+                <Callout tooltip={true}>
+                  <View>
+                    <View style={styles.bubble}>
+                      <Text style={styles.name}>Favourite Restaurant</Text>
+                      <Text>A short description</Text>
+                    </View>
+                    <Image
+                      style={styles.image}
+                      source={require("../assets/home-icons.jpg")}
+                    />
+                    <View style={styles.arrowBorder} />
+                    <View style={styles.arrow} />
+                  </View>
+                </Callout>
+              </Marker>
+              <Circle
+                center={markers}
+                radius={8}
+                strokeWidth={5}
+                strokeColor="tomato"
+              />
+            </MapView>
+            <View
+              style={{
+                position: "absolute",
+                width: wp(100),
+                marginTop: hp(12),
+                paddingHorizontal: 20,
+              }}
+            >
+              <Input
+                onChangeText={(newText) => setInputText(newText)}
+                rounded={20}
+                placeholder="Search"
+                p={5}
+                focusBorderColor="blue700"
+                suffix={
+                  <TouchableOpacity onPress={() => alert(inputText)}>
+                    <Icon
+                      p={9}
+                      name="search"
+                      color="gray900"
+                      fontFamily="Feather"
+                    />
+                  </TouchableOpacity>
+                }
+              />
+            </View>
+            <View
+              style={{
+                position: "absolute",
+                width: wp(90),
+                marginTop: hp(20),
+                marginHorizontal: 20,
+              }}
+            >
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                data={dataName}
+                key={(dataName) => dataName}
+                renderItem={({ item }) => (
+                  <TouchableWithoutFeedback
+                    onPress={() => alert(item.name)}
+                    style={{
+                      backgroundColor: "#1B2736",
+                      marginHorizontal: 5,
+                      flex: 1,
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 10,
+                      padding: 6,
+                    }}
+                  >
+                    <Icon
+                      name={item.iconName}
+                      color="white"
+                      fontSize={22}
+                      mr={10}
+                      ml={10}
+                      fontFamily={item.iconFamly}
+                    />
+                    <Text style={{ fontWeight: "bold", color: "white" }}>
+                      {item.name}
+                    </Text>
+                  </TouchableWithoutFeedback>
+                )}
+              />
+            </View>
+          </>
         )}
       </View>
     </>
-
-    // <View style={{ flex: 1 }}>
-    //   {initialRegion && markers && (
-    //     <>
-    //       <MapView
-    //         customMapStyle={styleMap}
-    //         showsCompass={false}
-    //         loadingIndicatorColor="red"
-    //         // showsTraffic={true}
-    //         loadingEnabled={true}
-    //         // zoomEnabled={true}
-    //         provider={PROVIDER_GOOGLE}
-    //         initialRegion={initialRegion}
-    //         style={{ width: wp(100), height: hp(100) }}
-    //       >
-    //         <Marker
-    //           coordinate={markers}
-    //           title="test-title"
-    //           description="test-descripcion"
-    //         >
-    //           <Callout tooltip>
-    //             <View>
-    //               <View style={styles.bubble}>
-    //                 <Text style={styles.name}>Favourite Restaurant</Text>
-    //                 <Text>A short description</Text>
-    //                 {/* <Image
-    //                 style={styles.image}
-    //                 source={{
-    //                   uri: "https://images.unsplash.com/photo-1593642532400-2682810df593?ixid=MXwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    //                 }}
-    //               /> */}
-    //               </View>
-    //               <View style={styles.arrowBorder} />
-    //               <View style={styles.arrow} />
-    //             </View>
-    //           </Callout>
-    //         </Marker>
-
-    //         <Circle
-    //           center={markers}
-    //           radius={8}
-    //           strokeWidth={5}
-    //           strokeColor="tomato"
-    //         />
-    //       </MapView>
-    //       <View
-    //         style={{
-    //           position: "absolute",
-    //           width: wp(100),
-    //           marginTop: hp(12),
-    //           paddingHorizontal: 20,
-
-    //           // marginHorizontal: wp(10),
-    //         }}
-    //       >
-    //         <Input
-    //           rounded={20}
-    //           placeholder="Search"
-    //           p={5}
-    //           focusBorderColor="blue700"
-    //           suffix={
-    //             <Icon name="search" color="gray900" fontFamily="Feather" />
-    //           }
-    //         />
-    //       </View>
-    //       <View
-    //         style={{
-    //           position: "absolute",
-    //           width: wp(90),
-    //           marginTop: hp(20),
-    //           marginHorizontal: 20,
-    //         }}
-    //       >
-    //         <FlatList
-    //           showsHorizontalScrollIndicator={false}
-    //           horizontal
-    //           data={dataName}
-    //           key={(dataName) => dataName}
-    //           renderItem={({ item }) => (
-    //             <TouchableWithoutFeedback
-    //               onPress={() => alert(item.name)}
-    //               style={{
-    //                 backgroundColor: "#1B2736",
-    //                 marginHorizontal: 5,
-    //                 flex: 1,
-    //                 flexDirection: "row",
-    //                 justifyContent: "center",
-    //                 alignItems: "center",
-    //                 borderRadius: 10,
-    //                 padding: 6,
-    //               }}
-    //             >
-    //               <Icon
-    //                 name={item.iconName}
-    //                 color="white"
-    //                 fontSize={22}
-    //                 mr={10}
-    //                 ml={10}
-    //                 fontFamily={item.iconFamly}
-    //               />
-    //               <Text style={{ fontWeight: "bold", color: "white" }}>
-    //                 {item.name}
-    //               </Text>
-    //             </TouchableWithoutFeedback>
-    //           )}
-    //         />
-    //       </View>
-    //     </>
-    //   )}
-    // </View>
   );
 }
-// const styles = StyleSheet.create({
-//   map: {
-//     height: "100%",
-//   },
-//   // Callout bubble
-//   bubble: {
-//     flexDirection: "column",
-//     alignSelf: "flex-start",
-//     backgroundColor: "#fff",
-//     borderRadius: 6,
-//     borderColor: "#ccc",
-//     borderWidth: 0.5,
-//     padding: 15,
-//     width: 150,
-//   },
-//   // Arrow below the bubble
-//   arrow: {
-//     backgroundColor: "transparent",
-//     borderColor: "transparent",
-//     borderTopColor: "#fff",
-//     borderWidth: 16,
-//     alignSelf: "center",
-//     marginTop: -32,
-//   },
-//   arrowBorder: {
-//     backgroundColor: "transparent",
-//     borderColor: "transparent",
-//     borderTopColor: "#007a87",
-//     borderWidth: 16,
-//     alignSelf: "center",
-//     marginTop: -0.5,
-//     // marginBottom: -15
-//   },
-//   // Character name
-//   name: {
-//     fontSize: 16,
-//     marginBottom: 5,
-//   },
-//   // Character image
-//   image: {
-//     width: 40,
-//     height: 80,
-//   },
-// });
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   map: {
-    width: "100%",
     height: "100%",
   },
+  // Callout bubble
+  bubble: {
+    flexDirection: "column",
+    alignSelf: "flex-start",
+    backgroundColor: "#fff",
+    borderRadius: 6,
+    borderColor: "#ccc",
+    borderWidth: 0.5,
+    padding: 15,
+    width: 150,
+  },
+  // Arrow below the bubble
+  arrow: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#fff",
+    borderWidth: 16,
+    alignSelf: "center",
+    marginTop: -32,
+  },
+  arrowBorder: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#007a87",
+    borderWidth: 16,
+    alignSelf: "center",
+    marginTop: -0.5,
+    // marginBottom: -15
+  },
+  // Character name
+  name: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  // Character image
+  image: {
+    width: 100,
+    height: 100,
+    // position: "absolute",
+  },
 });
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+//   map: {
+//     width: "100%",
+//     height: "100%",
+//   },
+// });
