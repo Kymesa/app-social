@@ -87,7 +87,8 @@ export default function Layout() {
         name="Maps"
         options={{
           headerTitleContainerStyle: { marginTop: 30 },
-          title: "You Location",
+          headerTitleStyle: { fontWeight: "bold", color: "black" },
+          title: "Your Location",
           headerTintColor: "white",
           tabBarLabel: "Maps",
           headerTitleAlign: "center",

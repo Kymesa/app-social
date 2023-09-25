@@ -16,6 +16,9 @@ import {
   FlatList,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
+import { DoctorsDB } from "../components/Maps/DoctorsDB";
+import { StoreDB } from "../components/Maps/StoreDB";
+import { EngginersDB } from "../components/Maps/Enginners";
 export default function Maps() {
   const dataName = [
     {
@@ -24,12 +27,12 @@ export default function Maps() {
       iconFamly: "FontAwesome5",
     },
     {
-      name: "Professionals",
+      name: "Doctors",
       iconName: "doctor",
       iconFamly: "MaterialCommunityIcons",
     },
     {
-      name: "Enginner",
+      name: "Engginers",
       iconName: "engineering",
       iconFamly: "MaterialIcons",
     },
@@ -48,12 +51,23 @@ export default function Maps() {
   const [initialRegion, setInitialRegion] = useState(null);
   const [markers, setMarkers] = useState(null);
   const [inputText, setInputText] = useState("");
+  const [doctors, setDoctors] = useState(false);
+  const [stores, setStore] = useState(false);
+  const [enginners, setEnginners] = useState(false);
   const styleMap = [
     {
       elementType: "geometry",
       stylers: [
         {
-          color: "#1d2c4d",
+          color: "#f5f5f5",
+        },
+      ],
+    },
+    {
+      elementType: "labels.icon",
+      stylers: [
+        {
+          visibility: "off",
         },
       ],
     },
@@ -61,7 +75,7 @@ export default function Maps() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#8ec3b9",
+          color: "#616161",
         },
       ],
     },
@@ -69,16 +83,7 @@ export default function Maps() {
       elementType: "labels.text.stroke",
       stylers: [
         {
-          color: "#1a3646",
-        },
-      ],
-    },
-    {
-      featureType: "administrative.country",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#4b6878",
+          color: "#f5f5f5",
         },
       ],
     },
@@ -87,34 +92,7 @@ export default function Maps() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#64779e",
-        },
-      ],
-    },
-    {
-      featureType: "administrative.province",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#4b6878",
-        },
-      ],
-    },
-    {
-      featureType: "landscape.man_made",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#334e87",
-        },
-      ],
-    },
-    {
-      featureType: "landscape.natural",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#023e58",
+          color: "#bdbdbd",
         },
       ],
     },
@@ -123,7 +101,7 @@ export default function Maps() {
       elementType: "geometry",
       stylers: [
         {
-          color: "#283d6a",
+          color: "#eeeeee",
         },
       ],
     },
@@ -132,25 +110,16 @@ export default function Maps() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#6f9ba5",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#1d2c4d",
+          color: "#757575",
         },
       ],
     },
     {
       featureType: "poi.park",
-      elementType: "geometry.fill",
+      elementType: "geometry",
       stylers: [
         {
-          color: "#023e58",
+          color: "#e5e5e5",
         },
       ],
     },
@@ -159,7 +128,7 @@ export default function Maps() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#3C7680",
+          color: "#9e9e9e",
         },
       ],
     },
@@ -168,25 +137,16 @@ export default function Maps() {
       elementType: "geometry",
       stylers: [
         {
-          color: "#304a7d",
+          color: "#ffffff",
         },
       ],
     },
     {
-      featureType: "road",
+      featureType: "road.arterial",
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#98a5be",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#1d2c4d",
+          color: "#757575",
         },
       ],
     },
@@ -195,16 +155,7 @@ export default function Maps() {
       elementType: "geometry",
       stylers: [
         {
-          color: "#2c6675",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#255763",
+          color: "#dadada",
         },
       ],
     },
@@ -213,43 +164,25 @@ export default function Maps() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#b0d5ce",
+          color: "#616161",
         },
       ],
     },
     {
-      featureType: "road.highway",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#023e58",
-        },
-      ],
-    },
-    {
-      featureType: "transit",
+      featureType: "road.local",
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#98a5be",
-        },
-      ],
-    },
-    {
-      featureType: "transit",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#1d2c4d",
+          color: "#9e9e9e",
         },
       ],
     },
     {
       featureType: "transit.line",
-      elementType: "geometry.fill",
+      elementType: "geometry",
       stylers: [
         {
-          color: "#283d6a",
+          color: "#e5e5e5",
         },
       ],
     },
@@ -258,7 +191,7 @@ export default function Maps() {
       elementType: "geometry",
       stylers: [
         {
-          color: "#3a4762",
+          color: "#eeeeee",
         },
       ],
     },
@@ -267,7 +200,7 @@ export default function Maps() {
       elementType: "geometry",
       stylers: [
         {
-          color: "#0e1626",
+          color: "#c9c9c9",
         },
       ],
     },
@@ -276,7 +209,7 @@ export default function Maps() {
       elementType: "labels.text.fill",
       stylers: [
         {
-          color: "#4e6d70",
+          color: "#9e9e9e",
         },
       ],
     },
@@ -288,29 +221,28 @@ export default function Maps() {
       alert("Permission to access location was denied");
       return;
     }
-    setInitialRegion({
-      latitude: 10.476713507755939,
-      longitude: -73.24236273765565,
-      latitudeDelta: 0.04,
-      longitudeDelta: 0.04,
-    });
-    setMarkers({
-      latitude: 10.476713507755939,
-      longitude: -73.24236273765565,
-    });
+    // setInitialRegion({
+    //   latitude: 10.476713507755939,
+    //   longitude: -73.24236273765565,
+    //   latitudeDelta: 0.03,
+    //   longitudeDelta: 0.03,
+    // });
+    // setMarkers({
+    //   latitude: 10.476713507755939,
+    //   longitude: -73.24236273765565,
+    // });
 
     let locationGet = await Location.getCurrentPositionAsync({});
     setInitialRegion({
       latitude: locationGet.coords.latitude,
       longitude: locationGet.coords.longitude,
-      latitudeDelta: 0.04,
-      longitudeDelta: 0.04,
+      latitudeDelta: 0.025,
+      longitudeDelta: 0.025,
     });
     setMarkers({
       latitude: locationGet.coords.latitude,
       longitude: locationGet.coords.longitude,
     });
-    console.log("LOCATION GET PERMIS: " + locationGet);
 
     // if (locationGet == null) {
     //   setInitialRegion({
@@ -339,6 +271,26 @@ export default function Maps() {
   useEffect(() => {
     getLocation();
   }, []);
+  const handleCheck = (item) => {
+    if (doctors | stores | enginners) {
+      setDoctors(false);
+      setStore(false);
+      setEnginners(false);
+    }
+    switch (item) {
+      case "Doctors":
+        setDoctors(!doctors);
+        break;
+      case "Store":
+        setStore(!stores);
+        break;
+      case "Engginers":
+        setEnginners(!enginners);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -354,32 +306,40 @@ export default function Maps() {
               initialRegion={initialRegion}
               style={{ width: wp(100), height: hp(100) }}
             >
-              <Marker
-                coordinate={markers}
-                title="test-title"
-                description="test-descripcion"
-              >
-                <Callout tooltip={true}>
-                  <View>
-                    <View style={styles.bubble}>
-                      <Text style={styles.name}>Favourite Restaurant</Text>
-                      <Text>A short description</Text>
-                    </View>
-                    <Image
-                      style={styles.image}
-                      source={require("../assets/home-icons.jpg")}
-                    />
-                    <View style={styles.arrowBorder} />
-                    <View style={styles.arrow} />
-                  </View>
-                </Callout>
-              </Marker>
               <Circle
                 center={markers}
                 radius={8}
                 strokeWidth={5}
                 strokeColor="tomato"
               />
+              <Marker coordinate={markers} title="I'm Here" />
+              {doctors &&
+                DoctorsDB.map((m, i) => (
+                  <Marker
+                    key={i}
+                    coordinate={m.cordinate}
+                    title={m.title}
+                    image={{ uri: m.imgUrl }}
+                  />
+                ))}
+              {stores &&
+                StoreDB.map((m, i) => (
+                  <Marker
+                    key={i}
+                    coordinate={m.cordinate}
+                    title={m.title}
+                    image={{ uri: m.imgUrl }}
+                  />
+                ))}
+              {enginners &&
+                EngginersDB.map((m, i) => (
+                  <Marker
+                    key={i}
+                    coordinate={m.cordinate}
+                    title={m.title}
+                    image={{ uri: m.imgUrl }}
+                  />
+                ))}
             </MapView>
             <View
               style={{
@@ -391,14 +351,15 @@ export default function Maps() {
             >
               <Input
                 onChangeText={(newText) => setInputText(newText)}
-                rounded={20}
-                placeholder="Search"
-                p={5}
+                rounded={15}
+                placeholder="Type Location you want"
+                fontSize={15}
+                // p={2}
                 focusBorderColor="blue700"
                 suffix={
                   <TouchableOpacity onPress={() => alert(inputText)}>
                     <Icon
-                      p={9}
+                      fontSize={20}
                       name="search"
                       color="gray900"
                       fontFamily="Feather"
@@ -411,7 +372,7 @@ export default function Maps() {
               style={{
                 position: "absolute",
                 width: wp(90),
-                marginTop: hp(20),
+                marginTop: hp(21),
                 marginHorizontal: 20,
               }}
             >
@@ -421,8 +382,8 @@ export default function Maps() {
                 data={dataName}
                 key={(dataName) => dataName}
                 renderItem={({ item }) => (
-                  <TouchableWithoutFeedback
-                    onPress={() => alert(item.name)}
+                  <TouchableOpacity
+                    onPress={() => handleCheck(item.name)}
                     style={{
                       backgroundColor: "#1B2736",
                       marginHorizontal: 5,
@@ -445,7 +406,7 @@ export default function Maps() {
                     <Text style={{ fontWeight: "bold", color: "white" }}>
                       {item.name}
                     </Text>
-                  </TouchableWithoutFeedback>
+                  </TouchableOpacity>
                 )}
               />
             </View>
@@ -455,46 +416,3 @@ export default function Maps() {
     </>
   );
 }
-const styles = StyleSheet.create({
-  map: {
-    height: "100%",
-  },
-
-  bubble: {
-    flexDirection: "column",
-    alignSelf: "flex-start",
-    backgroundColor: "#fff",
-    borderRadius: 6,
-    borderColor: "#ccc",
-    borderWidth: 0.5,
-    padding: 15,
-    width: 150,
-  },
-
-  arrow: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    borderTopColor: "#fff",
-    borderWidth: 16,
-    alignSelf: "center",
-    marginTop: -32,
-  },
-  arrowBorder: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    borderTopColor: "#007a87",
-    borderWidth: 16,
-    alignSelf: "center",
-    marginTop: -0.5,
-    // marginBottom: -15
-  },
-  name: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-
-  image: {
-    width: 100,
-    height: 100,
-  },
-});

@@ -11,7 +11,7 @@ const BtnHeaderMaps = () => {
         name="chevron-back"
         fontFamily="Ionicons"
         fontSize={32}
-        color="white"
+        color="black"
         mt={30}
         ml={20}
         h={40}
