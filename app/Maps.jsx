@@ -32,6 +32,7 @@ const Maps = () => {
   const [stores, setStore] = useState(false);
   const [enginners, setEnginners] = useState(false);
 
+  //? GET LOCATION EXPO
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync({});
     if (status !== "granted") {
@@ -65,6 +66,8 @@ const Maps = () => {
   useEffect(() => {
     getLocation();
   }, []);
+
+  //? PRESS CHECK INFORMATION
   const handleCheck = (item) => {
     if (doctors | stores | enginners) {
       setDoctors(false);
@@ -85,6 +88,8 @@ const Maps = () => {
         break;
     }
   };
+
+  //? INPUT SEARCH
   const onInputSearch = () => {
     if (doctors | stores | enginners) {
       setDoctors(false);
@@ -111,10 +116,6 @@ const Maps = () => {
         break;
     }
   };
-  // const onMarkePress = (mapEvenData) => {
-  //   const markerId = mapEvenData._targetInst.return.key;
-  //   let x = markerId * wp(50) + markerId * 20;
-  // };
   return (
     <>
       <View style={{ flex: 1 }}>
@@ -129,40 +130,46 @@ const Maps = () => {
               initialRegion={initialRegion}
               style={{ width: wp(100), height: hp(100) }}
             >
+              //? CIRCULO AL REBEDOR DE LA UBICACION ACTUAL
               <Circle
                 center={markers}
                 radius={8}
                 strokeWidth={5}
                 strokeColor="tomato"
               />
+              //? MARKER UBICACION ACTUAL
               <Marker coordinate={markers} title="I'm Here" />
-              {doctors &&
-                DoctorsDB.map((m, i) => (
-                  <Marker
-                    key={i}
-                    coordinate={m.cordinate}
-                    title={m.title}
-                    image={{ uri: m.imgUrl }}
-                  />
-                ))}
-              {stores &&
-                StoreDB.map((m, i) => (
-                  <Marker
-                    key={i}
-                    coordinate={m.cordinate}
-                    title={m.title}
-                    image={{ uri: m.imgUrl }}
-                  />
-                ))}
-              {enginners &&
-                EngginersDB.map((m, i) => (
-                  <Marker
-                    key={i}
-                    coordinate={m.cordinate}
-                    title={m.title}
-                    image={{ uri: m.imgUrl }}
-                  />
-                ))}
+              //? MARKERS
+              {doctors
+                ? DoctorsDB.map((m, i) => (
+                    <Marker
+                      key={i}
+                      coordinate={m.cordinate}
+                      title={m.title}
+                      image={{ uri: m.imgUrl }}
+                    />
+                  ))
+                : null}
+              {stores
+                ? StoreDB.map((m, i) => (
+                    <Marker
+                      key={i}
+                      coordinate={m.cordinate}
+                      title={m.title}
+                      image={{ uri: m.imgUrl }}
+                    />
+                  ))
+                : null}
+              {enginners
+                ? EngginersDB.map((m, i) => (
+                    <Marker
+                      key={i}
+                      coordinate={m.cordinate}
+                      title={m.title}
+                      image={{ uri: m.imgUrl }}
+                    />
+                  ))
+                : null}
             </MapView>
             <View
               style={{
@@ -234,7 +241,7 @@ const Maps = () => {
                 )}
               />
             </View>
-            {stores && (
+            {stores ? (
               <View
                 style={{
                   position: "absolute",
@@ -314,8 +321,8 @@ const Maps = () => {
                   )}
                 />
               </View>
-            )}
-            {doctors && (
+            ) : null}
+            {doctors ? (
               <View
                 style={{
                   position: "absolute",
@@ -388,8 +395,8 @@ const Maps = () => {
                   )}
                 />
               </View>
-            )}
-            {enginners && (
+            ) : null}
+            {enginners ? (
               <View
                 style={{
                   position: "absolute",
@@ -462,7 +469,7 @@ const Maps = () => {
                   )}
                 />
               </View>
-            )}
+            ) : null}
           </>
         )}
       </View>
