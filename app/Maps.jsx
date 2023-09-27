@@ -1,221 +1,38 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+// ? RECURSOS UTILIZADOS
 import React, { useEffect, useState } from "react";
+import { FlatList } from "react-native-gesture-handler";
+import { View, Text, TouchableOpacity, Pressable } from "react-native";
+// ? LIBRERIA PARA OBTENER LA ALTURA Y ANCHO DE LA PANTALLA
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import MapView, {
-  Callout,
-  Circle,
-  Marker,
-  PROVIDER_GOOGLE,
-} from "react-native-maps";
+//? LIBRERIA GOOGLE MAPS REACT NATIVE
+import MapView, { Circle, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+// ? EXPO LOCATION PERMISOS
 import * as Location from "expo-location";
+// ? FRAMEWORK CSS MAGNUS
 import { Icon, Image, Input } from "react-native-magnus";
-import {
-  FlatList,
-  TouchableWithoutFeedback,
-} from "react-native-gesture-handler";
-import { DoctorsDB } from "../components/Maps/DoctorsDB";
-import { StoreDB } from "../components/Maps/StoreDB";
-import { EngginersDB } from "../components/Maps/Enginners";
-export default function Maps() {
-  const dataName = [
-    {
-      name: "Store",
-      iconName: "store-alt",
-      iconFamly: "FontAwesome5",
-    },
-    {
-      name: "Doctors",
-      iconName: "doctor",
-      iconFamly: "MaterialCommunityIcons",
-    },
-    {
-      name: "Engginers",
-      iconName: "engineering",
-      iconFamly: "MaterialIcons",
-    },
-    {
-      name: "Services",
-      iconName: "monetization-on",
-      iconFamly: "MaterialIcons",
-    },
-    {
-      name: "World",
-      iconName: "globe-americas",
-      iconFamly: "FontAwesome5",
-    },
-  ];
-
+// ? RATING
+import StartRating from "../components/Maps/Rating";
+// ? DB - DOC - STORE - ENG
+import { DoctorsDB } from "../components/Maps/DB/DoctorsDB";
+import { StoreDB } from "../components/Maps/DB/StoreDB";
+import { EngginersDB } from "../components/Maps/DB/EnginnersDB";
+// ? CHECK LIST
+import { checkList } from "../components/Maps/CheckList";
+//? STYLE MAP
+import { styleMap } from "../components/Maps/StyleMap";
+const Maps = () => {
+  //? MANEJO DEL ESTADO
   const [initialRegion, setInitialRegion] = useState(null);
   const [markers, setMarkers] = useState(null);
   const [inputText, setInputText] = useState("");
   const [doctors, setDoctors] = useState(false);
   const [stores, setStore] = useState(false);
   const [enginners, setEnginners] = useState(false);
-  const styleMap = [
-    {
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#f5f5f5",
-        },
-      ],
-    },
-    {
-      elementType: "labels.icon",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#616161",
-        },
-      ],
-    },
-    {
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#f5f5f5",
-        },
-      ],
-    },
-    {
-      featureType: "administrative.land_parcel",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#bdbdbd",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#eeeeee",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#757575",
-        },
-      ],
-    },
-    {
-      featureType: "poi.park",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#e5e5e5",
-        },
-      ],
-    },
-    {
-      featureType: "poi.park",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#9e9e9e",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#ffffff",
-        },
-      ],
-    },
-    {
-      featureType: "road.arterial",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#757575",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#dadada",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#616161",
-        },
-      ],
-    },
-    {
-      featureType: "road.local",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#9e9e9e",
-        },
-      ],
-    },
-    {
-      featureType: "transit.line",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#e5e5e5",
-        },
-      ],
-    },
-    {
-      featureType: "transit.station",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#eeeeee",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#c9c9c9",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#9e9e9e",
-        },
-      ],
-    },
-  ];
 
-  async function getLocation() {
+  const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync({});
     if (status !== "granted") {
       alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!");
@@ -243,7 +60,8 @@ export default function Maps() {
       latitude: locationGet.coords.latitude,
       longitude: locationGet.coords.longitude,
     });
-  }
+  };
+
   useEffect(() => {
     getLocation();
   }, []);
@@ -267,6 +85,36 @@ export default function Maps() {
         break;
     }
   };
+  const onInputSearch = () => {
+    if (doctors | stores | enginners) {
+      setDoctors(false);
+      setStore(false);
+      setEnginners(false);
+    }
+    switch (inputText.toLowerCase()) {
+      case "doc":
+      case "doctor":
+      case "doctors":
+        setDoctors(!doctors);
+        break;
+      case "store":
+        setStore(!stores);
+        break;
+      case "eng":
+      case "engginer":
+      case "engginers":
+        setEnginners(!enginners);
+        break;
+      default:
+        alert("No coincide tu busqueda, con los check disponibles");
+        setInputText("");
+        break;
+    }
+  };
+  // const onMarkePress = (mapEvenData) => {
+  //   const markerId = mapEvenData._targetInst.return.key;
+  //   let x = markerId * wp(50) + markerId * 20;
+  // };
   return (
     <>
       <View style={{ flex: 1 }}>
@@ -328,11 +176,12 @@ export default function Maps() {
                 onChangeText={(newText) => setInputText(newText)}
                 rounded={15}
                 placeholder="Type Location you want"
+                value={inputText}
                 fontSize={15}
                 // p={2}
                 focusBorderColor="blue700"
                 suffix={
-                  <TouchableOpacity onPress={() => alert(inputText)}>
+                  <TouchableOpacity onPress={onInputSearch}>
                     <Icon
                       fontSize={20}
                       name="search"
@@ -354,10 +203,10 @@ export default function Maps() {
               <FlatList
                 showsHorizontalScrollIndicator={false}
                 horizontal
-                data={dataName}
-                key={(dataName) => dataName}
+                data={checkList}
+                key={(checkList) => checkList}
                 renderItem={({ item }) => (
-                  <TouchableOpacity
+                  <Pressable
                     onPress={() => handleCheck(item.name)}
                     style={{
                       backgroundColor: "#1B2736",
@@ -381,13 +230,243 @@ export default function Maps() {
                     <Text style={{ fontWeight: "bold", color: "white" }}>
                       {item.name}
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               />
             </View>
+            {stores && (
+              <View
+                style={{
+                  position: "absolute",
+                  top: hp(79),
+                  left: wp(2),
+                }}
+              >
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  data={StoreDB}
+                  key={(StoreDB) => StoreDB}
+                  style={{ marginRight: 20 }}
+                  renderItem={({ item }) => (
+                    <View
+                      style={{
+                        width: wp(60),
+                        backgroundColor: "white",
+                        marginHorizontal: 10,
+                        height: hp(10),
+                        flex: 1,
+                        flexDirection: "row",
+                        borderRadius: 10,
+                      }}
+                    >
+                      <View>
+                        <Image
+                          h={74}
+                          w={60}
+                          ml={8}
+                          mt={5}
+                          rounded={10}
+                          source={{
+                            uri: item.imgUrl,
+                          }}
+                        />
+                      </View>
+                      <View style={{ marginLeft: wp(3) }}>
+                        <Text
+                          style={{ fontWeight: "bold", marginTop: hp(1.5) }}
+                        >
+                          {item.title}
+                        </Text>
+                        <View
+                          style={{
+                            flex: 1,
+                            flexDirection: "row",
+                            maxHeight: 20,
+                          }}
+                        >
+                          <Icon
+                            name="map-pin"
+                            fontFamily="Feather"
+                            fontSize={12}
+                            color="red"
+                            bg="white"
+                            h={18}
+                            w={18}
+                            rounded="md"
+                          />
+                          <Text style={{ color: "#444", fontSize: 12 }}>
+                            2.5 Km
+                          </Text>
+                        </View>
+                        <View>
+                          {/* <Rating
+                            showReadOnlyText
+                            imageSize={40}
+                            // onFinishRating={ratingCompleted}
+                            startingValue={item.rating}
+                            style={{ paddingVertical: 10 }}
+                          /> */}
+                          <StartRating ratings={item.rating} reviews={10} />
+                        </View>
+                      </View>
+                    </View>
+                  )}
+                />
+              </View>
+            )}
+            {doctors && (
+              <View
+                style={{
+                  position: "absolute",
+                  top: hp(79),
+                  left: wp(2),
+                }}
+              >
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  data={DoctorsDB}
+                  key={(DoctorsDB) => DoctorsDB}
+                  style={{ marginRight: 20 }}
+                  renderItem={({ item }) => (
+                    <View
+                      style={{
+                        width: wp(60),
+                        backgroundColor: "white",
+                        marginHorizontal: 10,
+                        height: hp(10),
+                        flex: 1,
+                        flexDirection: "row",
+                        borderRadius: 10,
+                      }}
+                    >
+                      <View>
+                        <Image
+                          h={74}
+                          w={60}
+                          ml={8}
+                          mt={5}
+                          rounded={10}
+                          source={{
+                            uri: item.imgUrl,
+                          }}
+                        />
+                      </View>
+                      <View style={{ marginLeft: wp(3) }}>
+                        <Text
+                          style={{ fontWeight: "bold", marginTop: hp(1.5) }}
+                        >
+                          {item.title}
+                        </Text>
+                        <View
+                          style={{
+                            flex: 1,
+                            flexDirection: "row",
+                            maxHeight: 20,
+                          }}
+                        >
+                          <Icon
+                            name="map-pin"
+                            fontFamily="Feather"
+                            fontSize={12}
+                            color="red"
+                            bg="white"
+                            h={18}
+                            w={18}
+                            rounded="md"
+                          />
+                          <Text style={{ color: "#444", fontSize: 12 }}>
+                            2.5 Km
+                          </Text>
+                        </View>
+                        <View>
+                          <StartRating ratings={item.rating} reviews={10} />
+                        </View>
+                      </View>
+                    </View>
+                  )}
+                />
+              </View>
+            )}
+            {enginners && (
+              <View
+                style={{
+                  position: "absolute",
+                  top: hp(79),
+                  left: wp(2),
+                }}
+              >
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  data={EngginersDB}
+                  key={(EngginersDB) => EngginersDB}
+                  style={{ marginRight: 20 }}
+                  renderItem={({ item }) => (
+                    <View
+                      style={{
+                        width: wp(60),
+                        backgroundColor: "white",
+                        marginHorizontal: 10,
+                        height: hp(10),
+                        flex: 1,
+                        flexDirection: "row",
+                        borderRadius: 10,
+                      }}
+                    >
+                      <View>
+                        <Image
+                          h={74}
+                          w={60}
+                          ml={8}
+                          mt={5}
+                          rounded={10}
+                          source={{
+                            uri: item.imgUrl,
+                          }}
+                        />
+                      </View>
+                      <View style={{ marginLeft: wp(3) }}>
+                        <Text
+                          style={{ fontWeight: "bold", marginTop: hp(1.5) }}
+                        >
+                          {item.title}
+                        </Text>
+                        <View
+                          style={{
+                            flex: 1,
+                            flexDirection: "row",
+                            maxHeight: 20,
+                          }}
+                        >
+                          <Icon
+                            name="map-pin"
+                            fontFamily="Feather"
+                            fontSize={12}
+                            color="red"
+                            bg="white"
+                            h={18}
+                            w={18}
+                            rounded="md"
+                          />
+                          <Text style={{ color: "#444", fontSize: 12 }}>
+                            2.5 Km
+                          </Text>
+                        </View>
+                        <View>
+                          <StartRating ratings={item.rating} reviews={10} />
+                        </View>
+                      </View>
+                    </View>
+                  )}
+                />
+              </View>
+            )}
           </>
         )}
       </View>
     </>
   );
-}
+};
+export default Maps;

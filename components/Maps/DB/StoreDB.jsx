@@ -19,7 +19,7 @@ const StoreDB = [
     title: "Shop",
     descripcion: "yeah god doctor aleluya",
     price: 99,
-    rating: 4,
+    rating: 1,
     imgUrl:
       "https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c3RvcmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=100&q=80&h=120",
   },
@@ -31,7 +31,7 @@ const StoreDB = [
     title: "Super Full",
     descripcion: "yeah god doctor aleluya",
     price: 99,
-    rating: 4,
+    rating: 2,
     imgUrl:
       "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3RvcmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=100&q=80&h=120",
   },
@@ -43,7 +43,7 @@ const StoreDB = [
     title: "Provisiones",
     descripcion: "yeah god doctor aleluya",
     price: 99,
-    rating: 4,
+    rating: 3,
     imgUrl:
       "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3RvcmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=100&q=80&h=120",
   },
