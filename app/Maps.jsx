@@ -20,11 +20,10 @@ import { DoctorsDB } from "../components/Maps/DB/DoctorsDB";
 import { StoreDB } from "../components/Maps/DB/StoreDB";
 import { EngginersDB } from "../components/Maps/DB/EnginnersDB";
 // ? CHECK LIST
-import { checkList } from "../components/Maps/CheckList";
+import { checkList } from "../components/Maps/DB/CheckList";
 //? STYLE MAP
 import { styleMap } from "../components/Maps/StyleMap";
 const Maps = () => {
-  //? MANEJO DEL ESTADO
   const [initialRegion, setInitialRegion] = useState(null);
   const [markers, setMarkers] = useState(null);
   const [inputText, setInputText] = useState("");
@@ -32,7 +31,6 @@ const Maps = () => {
   const [stores, setStore] = useState(false);
   const [enginners, setEnginners] = useState(false);
 
-  //? GET LOCATION EXPO
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync({});
     if (status !== "granted") {
@@ -67,7 +65,6 @@ const Maps = () => {
     getLocation();
   }, []);
 
-  //? PRESS CHECK INFORMATION
   const handleCheck = (item) => {
     if (doctors | stores | enginners) {
       setDoctors(false);
@@ -119,7 +116,7 @@ const Maps = () => {
   return (
     <>
       <View style={{ flex: 1 }}>
-        {initialRegion && markers && (
+        {initialRegion ? (
           <>
             <MapView
               customMapStyle={styleMap}
@@ -130,16 +127,15 @@ const Maps = () => {
               initialRegion={initialRegion}
               style={{ width: wp(100), height: hp(100) }}
             >
-              //? CIRCULO AL REBEDOR DE LA UBICACION ACTUAL
               <Circle
                 center={markers}
                 radius={8}
                 strokeWidth={5}
                 strokeColor="tomato"
               />
-              //? MARKER UBICACION ACTUAL
+
               <Marker coordinate={markers} title="I'm Here" />
-              //? MARKERS
+
               {doctors
                 ? DoctorsDB.map((m, i) => (
                     <Marker
@@ -307,13 +303,6 @@ const Maps = () => {
                           </Text>
                         </View>
                         <View>
-                          {/* <Rating
-                            showReadOnlyText
-                            imageSize={40}
-                            // onFinishRating={ratingCompleted}
-                            startingValue={item.rating}
-                            style={{ paddingVertical: 10 }}
-                          /> */}
                           <StartRating ratings={item.rating} reviews={10} />
                         </View>
                       </View>
@@ -471,7 +460,7 @@ const Maps = () => {
               </View>
             ) : null}
           </>
-        )}
+        ) : null}
       </View>
     </>
   );
