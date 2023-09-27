@@ -12,9 +12,7 @@ import MapView, { Circle, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 // ? EXPO LOCATION PERMISOS
 import * as Location from "expo-location";
 // ? FRAMEWORK CSS MAGNUS
-import { Icon, Image, Input } from "react-native-magnus";
-// ? RATING
-import StartRating from "../components/Maps/Rating";
+import { Icon, Input } from "react-native-magnus";
 // ? DB - DOC - STORE - ENG
 import { DoctorsDB } from "../components/Maps/DB/DoctorsDB";
 import { StoreDB } from "../components/Maps/DB/StoreDB";
@@ -23,6 +21,7 @@ import { EngginersDB } from "../components/Maps/DB/EnginnersDB";
 import { checkList } from "../components/Maps/DB/CheckList";
 //? STYLE MAP
 import { styleMap } from "../components/Maps/StyleMap";
+import ListCard from "../components/Maps/ListCard";
 const Maps = () => {
   const [initialRegion, setInitialRegion] = useState(null);
   const [markers, setMarkers] = useState(null);
@@ -237,228 +236,9 @@ const Maps = () => {
                 )}
               />
             </View>
-            {stores ? (
-              <View
-                style={{
-                  position: "absolute",
-                  top: hp(79),
-                  left: wp(2),
-                }}
-              >
-                <FlatList
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  data={StoreDB}
-                  key={(StoreDB) => StoreDB}
-                  style={{ marginRight: 20 }}
-                  renderItem={({ item }) => (
-                    <View
-                      style={{
-                        width: wp(60),
-                        backgroundColor: "white",
-                        marginHorizontal: 10,
-                        height: hp(10),
-                        flex: 1,
-                        flexDirection: "row",
-                        borderRadius: 10,
-                      }}
-                    >
-                      <View>
-                        <Image
-                          h={74}
-                          w={60}
-                          ml={8}
-                          mt={5}
-                          rounded={10}
-                          source={{
-                            uri: item.imgUrl,
-                          }}
-                        />
-                      </View>
-                      <View style={{ marginLeft: wp(3) }}>
-                        <Text
-                          style={{ fontWeight: "bold", marginTop: hp(1.5) }}
-                        >
-                          {item.title}
-                        </Text>
-                        <View
-                          style={{
-                            flex: 1,
-                            flexDirection: "row",
-                            maxHeight: 20,
-                          }}
-                        >
-                          <Icon
-                            name="map-pin"
-                            fontFamily="Feather"
-                            fontSize={12}
-                            color="red"
-                            bg="white"
-                            h={18}
-                            w={18}
-                            rounded="md"
-                          />
-                          <Text style={{ color: "#444", fontSize: 12 }}>
-                            2.5 Km
-                          </Text>
-                        </View>
-                        <View>
-                          <StartRating ratings={item.rating} reviews={10} />
-                        </View>
-                      </View>
-                    </View>
-                  )}
-                />
-              </View>
-            ) : null}
-            {doctors ? (
-              <View
-                style={{
-                  position: "absolute",
-                  top: hp(79),
-                  left: wp(2),
-                }}
-              >
-                <FlatList
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  data={DoctorsDB}
-                  key={(DoctorsDB) => DoctorsDB}
-                  style={{ marginRight: 20 }}
-                  renderItem={({ item }) => (
-                    <View
-                      style={{
-                        width: wp(60),
-                        backgroundColor: "white",
-                        marginHorizontal: 10,
-                        height: hp(10),
-                        flex: 1,
-                        flexDirection: "row",
-                        borderRadius: 10,
-                      }}
-                    >
-                      <View>
-                        <Image
-                          h={74}
-                          w={60}
-                          ml={8}
-                          mt={5}
-                          rounded={10}
-                          source={{
-                            uri: item.imgUrl,
-                          }}
-                        />
-                      </View>
-                      <View style={{ marginLeft: wp(3) }}>
-                        <Text
-                          style={{ fontWeight: "bold", marginTop: hp(1.5) }}
-                        >
-                          {item.title}
-                        </Text>
-                        <View
-                          style={{
-                            flex: 1,
-                            flexDirection: "row",
-                            maxHeight: 20,
-                          }}
-                        >
-                          <Icon
-                            name="map-pin"
-                            fontFamily="Feather"
-                            fontSize={12}
-                            color="red"
-                            bg="white"
-                            h={18}
-                            w={18}
-                            rounded="md"
-                          />
-                          <Text style={{ color: "#444", fontSize: 12 }}>
-                            2.5 Km
-                          </Text>
-                        </View>
-                        <View>
-                          <StartRating ratings={item.rating} reviews={10} />
-                        </View>
-                      </View>
-                    </View>
-                  )}
-                />
-              </View>
-            ) : null}
-            {enginners ? (
-              <View
-                style={{
-                  position: "absolute",
-                  top: hp(79),
-                  left: wp(2),
-                }}
-              >
-                <FlatList
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  data={EngginersDB}
-                  key={(EngginersDB) => EngginersDB}
-                  style={{ marginRight: 20 }}
-                  renderItem={({ item }) => (
-                    <View
-                      style={{
-                        width: wp(60),
-                        backgroundColor: "white",
-                        marginHorizontal: 10,
-                        height: hp(10),
-                        flex: 1,
-                        flexDirection: "row",
-                        borderRadius: 10,
-                      }}
-                    >
-                      <View>
-                        <Image
-                          h={74}
-                          w={60}
-                          ml={8}
-                          mt={5}
-                          rounded={10}
-                          source={{
-                            uri: item.imgUrl,
-                          }}
-                        />
-                      </View>
-                      <View style={{ marginLeft: wp(3) }}>
-                        <Text
-                          style={{ fontWeight: "bold", marginTop: hp(1.5) }}
-                        >
-                          {item.title}
-                        </Text>
-                        <View
-                          style={{
-                            flex: 1,
-                            flexDirection: "row",
-                            maxHeight: 20,
-                          }}
-                        >
-                          <Icon
-                            name="map-pin"
-                            fontFamily="Feather"
-                            fontSize={12}
-                            color="red"
-                            bg="white"
-                            h={18}
-                            w={18}
-                            rounded="md"
-                          />
-                          <Text style={{ color: "#444", fontSize: 12 }}>
-                            2.5 Km
-                          </Text>
-                        </View>
-                        <View>
-                          <StartRating ratings={item.rating} reviews={10} />
-                        </View>
-                      </View>
-                    </View>
-                  )}
-                />
-              </View>
-            ) : null}
+            {stores && <ListCard dataDB={StoreDB} />}
+            {doctors && <ListCard dataDB={DoctorsDB} />}
+            {enginners && <ListCard dataDB={EngginersDB} />}
           </>
         ) : null}
       </View>
