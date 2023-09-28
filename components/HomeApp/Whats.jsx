@@ -18,7 +18,7 @@ const Whats = () => {
         mr={30}
         rounded="circle"
         source={{
-          uri: "https://images.unsplash.com/photo-1693249646175-8b21fe05acc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDMzfHRvd0paRnNrcEdnfHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+          uri: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=600",
         }}
       />
       <Text style={{ fontWeight: "bold", fontSize: 15 }}>

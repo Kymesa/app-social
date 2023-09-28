@@ -1,4 +1,4 @@
-// ? RECURSOS UTILIZADOS
+// ? RN UTILIZADOS
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { View, Text, TouchableOpacity, Pressable } from "react-native";
@@ -22,6 +22,7 @@ import { checkList } from "../components/Maps/DB/CheckList";
 //? STYLE MAP
 import { styleMap } from "../components/Maps/StyleMap";
 import ListCard from "../components/Maps/ListCard";
+import MarkerList from "../components/Maps/MarkerList";
 const Maps = () => {
   const [initialRegion, setInitialRegion] = useState(null);
   const [markers, setMarkers] = useState(null);
@@ -135,7 +136,11 @@ const Maps = () => {
 
               <Marker coordinate={markers} title="I'm Here" />
 
-              {doctors
+              {doctors && <MarkerList dataDB={DoctorsDB} />}
+              {stores && <MarkerList dataDB={StoreDB} />}
+              {enginners && <MarkerList dataDB={EngginersDB} />}
+
+              {/* {doctors
                 ? DoctorsDB.map((m, i) => (
                     <Marker
                       key={i}
@@ -144,8 +149,8 @@ const Maps = () => {
                       image={{ uri: m.imgUrl }}
                     />
                   ))
-                : null}
-              {stores
+                : null} */}
+              {/* {stores
                 ? StoreDB.map((m, i) => (
                     <Marker
                       key={i}
@@ -164,7 +169,7 @@ const Maps = () => {
                       image={{ uri: m.imgUrl }}
                     />
                   ))
-                : null}
+                : null} */}
             </MapView>
             <View
               style={{

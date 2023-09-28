@@ -12,7 +12,7 @@ const ListCard = ({ dataDB }) => {
       <View
         style={{
           position: "absolute",
-          top: hp(79),
+          top: hp(82),
           left: wp(2),
         }}
       >
