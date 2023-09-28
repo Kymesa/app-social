@@ -17,7 +17,7 @@ import { Icon, Input } from "react-native-magnus";
 import { DoctorsDB } from "../components/Maps/DB/DoctorsDB";
 import { StoreDB } from "../components/Maps/DB/StoreDB";
 import { EngginersDB } from "../components/Maps/DB/EnginnersDB";
-// ? CHECK LIST
+// ? CHECK LISTS
 import { checkList } from "../components/Maps/DB/CheckList";
 //? STYLE MAP
 import { styleMap } from "../components/Maps/StyleMap";
