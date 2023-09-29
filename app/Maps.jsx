@@ -59,6 +59,17 @@ const Maps = () => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
+        let locationGet = await Location.getCurrentPositionAsync({});
+        setInitialRegion({
+          latitude: locationGet.coords.latitude,
+          longitude: locationGet.coords.longitude,
+          latitudeDelta: 0.03,
+          longitudeDelta: 0.03,
+        });
+        setMarkers({
+          latitude: locationGet.coords.latitude,
+          longitude: locationGet.coords.longitude,
+        });
         return;
       }
 
