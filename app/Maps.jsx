@@ -32,7 +32,7 @@ const Maps = () => {
   const [stores, setStore] = useState(false);
   const [enginners, setEnginners] = useState(false);
   // const [markerId, setMarkerId] = useState(0)
-  const [arrMarker, setArrMarker] = useState(null)
+  const [arrMarker, setArrMarker] = useState(null);
 
   // const getLocation = async () => {
   //   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -58,19 +58,19 @@ const Maps = () => {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
+      if (status !== "granted") {
         return;
       }
 
       setInitialRegion({
-        latitude:6.230833,
+        latitude: 6.230833,
         longitude: -75.590553,
         latitudeDelta: 0.03,
         longitudeDelta: 0.03,
       });
       setMarkers({
-        latitude:6.230833,
-        longitude:-75.590553,
+        latitude: 6.230833,
+        longitude: -75.590553,
       });
 
       let locationGet = await Location.getCurrentPositionAsync({});
@@ -87,14 +87,12 @@ const Maps = () => {
     })();
   }, [arrMarker]);
 
-
-
   const handleCheck = (item) => {
     if (doctors | stores | enginners) {
       setDoctors(false);
       setStore(false);
       setEnginners(false);
-      setArrMarker(null)
+      setArrMarker(null);
     }
     switch (item) {
       case "Doctors":
@@ -112,128 +110,133 @@ const Maps = () => {
   };
 
   const searchPlaces = () => {
-    if(inputText == "Valledupar" || inputText == "valledupar"){
-      mapView.current.animateToRegion({ // Takes a region object as parameter
-        latitude: 10.476713507755939,
-        longitude: -73.24236273765565,
-        latitudeDelta: 0.03,
-        longitudeDelta: 0.03,
-    },1000); 
+    if (inputText == "Valledupar" || inputText == "valledupar") {
+      mapView.current.animateToRegion(
+        {
+          // Takes a region object as parameter
+          latitude: 10.476713507755939,
+          longitude: -73.24236273765565,
+          latitudeDelta: 0.03,
+          longitudeDelta: 0.03,
+        },
+        1000
+      );
     }
   };
 
   const handleEvent = (e, dataDB) => {
     const markeId = e._targetInst.return.key;
     const dataMarker = dataDB.find((m) => {
-      return m.id == markeId
-    })
-    setArrMarker(dataMarker)
-  }
+      return m.id == markeId;
+    });
+    setArrMarker(dataMarker);
+  };
   return (
     <>
       <View style={{ flex: 1 }}>
-        { initialRegion && (
+        {initialRegion && (
           <>
-          <MapView
-          
-            ref={mapView}
-            customMapStyle={styleMap}
-            showsCompass={false}
-            loadingIndicatorColor="red"
-            loadingEnabled={true}
-            provider={PROVIDER_GOOGLE}
-            initialRegion={initialRegion}
-            style={{ width: wp(100), height: hp(100) }}
-          >
-            <Circle
-              center={markers}
-              radius={8}
-              strokeWidth={5}
-              strokeColor="tomato"
-            />
-
-            <Marker coordinate={markers} title="I'm Here" />
-
-            {doctors && <MarkerList dataDB={DoctorsDB} event={handleEvent}/>}
-            {stores && <MarkerList dataDB={StoreDB} event={handleEvent}/>}
-            {enginners && <MarkerList dataDB={EngginersDB} event={handleEvent}/>}
-          </MapView>
-        </>
-        ) }
-          
-         <View
-              style={{
-                position: "absolute",
-                width: wp(100),
-                marginTop: hp(12),
-                paddingHorizontal: 20,
-              }}
+            <MapView
+              ref={mapView}
+              customMapStyle={styleMap}
+              showsCompass={false}
+              loadingIndicatorColor="red"
+              loadingEnabled={true}
+              provider={PROVIDER_GOOGLE}
+              initialRegion={initialRegion}
+              style={{ width: wp(100), height: hp(100) }}
             >
-              <Input
-                onChangeText={(newText) => setInputText(newText)}
-                rounded={15}
-                placeholder="Type Location you want"
-                value={inputText}
-                fontSize={15}
-                // p={2}
-                focusBorderColor="blue700"
-                suffix={
-                  <TouchableOpacity onPress={searchPlaces}>
-                    <Icon
-                      fontSize={20}
-                      name="search"
-                      color="gray900"
-                      fontFamily="Feather"
-                    />
-                  </TouchableOpacity>
-                }
+              <Circle
+                center={markers}
+                radius={8}
+                strokeWidth={5}
+                strokeColor="tomato"
               />
-            </View>
-            <View
-              style={{
-                position: "absolute",
-                width: wp(90),
-                marginTop: hp(21),
-                marginHorizontal: 20,
-              }}
-            >
-              <FlatList
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={checkList}
-                key={(checkList) => checkList}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => handleCheck(item.name)}
-                    style={{
-                      backgroundColor: "#1B2736",
-                      marginHorizontal: 5,
-                      flex: 1,
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 10,
-                      padding: 6,
-                    }}
-                  >
-                    <Icon
-                      name={item.iconName}
-                      color="white"
-                      fontSize={22}
-                      mr={10}
-                      ml={10}
-                      fontFamily={item.iconFamly}
-                    />
-                    <Text style={{ fontWeight: "bold", color: "white" }}>
-                      {item.name}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-            {stores && arrMarker && <ListCard dataDB={arrMarker} />}
-            {doctors && arrMarker && <ListCard dataDB={arrMarker} />}
-            {enginners && arrMarker && <ListCard dataDB={arrMarker} />}
+
+              <Marker coordinate={markers} title="I'm Here" />
+
+              {doctors && <MarkerList dataDB={DoctorsDB} event={handleEvent} />}
+              {stores && <MarkerList dataDB={StoreDB} event={handleEvent} />}
+              {enginners && (
+                <MarkerList dataDB={EngginersDB} event={handleEvent} />
+              )}
+            </MapView>
+          </>
+        )}
+
+        <View
+          style={{
+            position: "absolute",
+            width: wp(100),
+            marginTop: hp(12),
+            paddingHorizontal: 20,
+          }}
+        >
+          <Input
+            onChangeText={(newText) => setInputText(newText)}
+            rounded={15}
+            placeholder="Type Location you want"
+            value={inputText}
+            fontSize={15}
+            // p={2}
+            focusBorderColor="blue700"
+            suffix={
+              <TouchableOpacity onPress={searchPlaces}>
+                <Icon
+                  fontSize={20}
+                  name="search"
+                  color="gray900"
+                  fontFamily="Feather"
+                />
+              </TouchableOpacity>
+            }
+          />
+        </View>
+        <View
+          style={{
+            position: "absolute",
+            width: wp(90),
+            marginTop: hp(21),
+            marginHorizontal: 20,
+          }}
+        >
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            data={checkList}
+            key={(checkList) => checkList}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => handleCheck(item.name)}
+                style={{
+                  backgroundColor: "#1B2736",
+                  marginHorizontal: 5,
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 10,
+                  padding: 6,
+                }}
+              >
+                <Icon
+                  name={item.iconName}
+                  color="white"
+                  fontSize={22}
+                  mr={10}
+                  ml={10}
+                  fontFamily={item.iconFamly}
+                />
+                <Text style={{ fontWeight: "bold", color: "white" }}>
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+        {stores && arrMarker && <ListCard dataDB={arrMarker} />}
+        {doctors && arrMarker && <ListCard dataDB={arrMarker} />}
+        {enginners && arrMarker && <ListCard dataDB={arrMarker} />}
       </View>
     </>
   );
