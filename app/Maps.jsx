@@ -211,7 +211,7 @@ const Maps = () => {
                 data={checkList}
                 key={(checkList) => checkList}
                 renderItem={({ item }) => (
-                  <Pressable
+                  <TouchableOpacity
                     onPress={() => handleCheck(item.name)}
                     style={{
                       backgroundColor: "#1B2736",
@@ -235,7 +235,7 @@ const Maps = () => {
                     <Text style={{ fontWeight: "bold", color: "white" }}>
                       {item.name}
                     </Text>
-                  </Pressable>
+                  </TouchableOpacity>
                 )}
               />
             </View>
