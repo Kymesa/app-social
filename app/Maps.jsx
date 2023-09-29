@@ -1,5 +1,5 @@
 // ? RN UTILIZADOS
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { View, Text, TouchableOpacity, Pressable } from "react-native";
 // ? LIBRERIA PARA OBTENER LA ALTURA Y ANCHO DE LA PANTALLA
@@ -24,6 +24,7 @@ import { styleMap } from "../components/Maps/StyleMap";
 import ListCard from "../components/Maps/ListCard";
 import MarkerList from "../components/Maps/MarkerList";
 const Maps = () => {
+  const mapView = useRef(null);
   const [initialRegion, setInitialRegion] = useState(null);
   const [markers, setMarkers] = useState(null);
   const [inputText, setInputText] = useState("");
@@ -36,26 +37,26 @@ const Maps = () => {
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync({});
     if (status !== "granted") {
-      alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!");
-      return;
+      alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!, TU POSICION (INICIAL) SERA EN MEDELLIN, 'ACTIVA LOS PERMISOS DE UBICACION EN AJUSTES O LIMPIA LA DATA DE LA APP' ");
+      setInitialRegion({
+        longitude: -75.5635900,
+        latitude: 6.2518400,
+        latitudeDelta: 0.3,
+        longitudeDelta: 0.3,
+      });
+      setMarkers({
+        longitude: -75.5635900,
+        latitude: 6.2518400,
+      });
+      return
     }
-    setInitialRegion({
-      latitude: 10.476713507755939,
-      longitude: -73.24236273765565,
-      latitudeDelta: 0.03,
-      longitudeDelta: 0.03,
-    });
-    setMarkers({
-      latitude: 10.476713507755939,
-      longitude: -73.24236273765565,
-    });
 
     let locationGet = await Location.getCurrentPositionAsync({});
     setInitialRegion({
       latitude: locationGet.coords.latitude,
       longitude: locationGet.coords.longitude,
-      latitudeDelta: 0.025,
-      longitudeDelta: 0.025,
+      latitudeDelta: 0.03,
+      longitudeDelta: 0.03,
     });
     setMarkers({
       latitude: locationGet.coords.latitude,
@@ -89,37 +90,19 @@ const Maps = () => {
     }
   };
 
-  //? INPUT SEARCH
   const searchPlaces = () => {
-    // if (doctors | stores | enginners) {
-    //   setDoctors(false);
-    //   setStore(false);
-    //   setEnginners(false);
-    // }
-    // switch (inputText.toLowerCase()) {
-    //   case "doc":
-    //   case "doctor":
-    //   case "doctors":
-    //     setDoctors(!doctors);
-    //     break;
-    //   case "store":
-    //     setStore(!stores);
-    //     break;
-    //   case "eng":
-    //   case "engginer":
-    //   case "engginers":
-    //     setEnginners(!enginners);
-    //     break;
-    //   default:
-    //     alert("No coincide tu busqueda, con los check disponibles");
-    //     setInputText("");
-    //     break;
-    // }
-    if(!inputText.trim().length) return ;
+    if(inputText == "Valledupar" || inputText == "valledupar"){
+      mapView.current.animateToRegion({ // Takes a region object as parameter
+        latitude: 10.476713507755939,
+        longitude: -73.24236273765565,
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.03,
+    },1000);
+    }
   };
 
   const handleEvent = (e, dataDB) => {
-    const markeId = e._targetInst.return.key
+    const markeId = e._targetInst.return.key;
     const dataMarker = dataDB.find((m) => {
       return m.id == markeId
     })
@@ -131,6 +114,7 @@ const Maps = () => {
         {initialRegion ? (
           <>
             <MapView
+            ref={mapView}
               customMapStyle={styleMap}
               showsCompass={false}
               loadingIndicatorColor="red"
