@@ -98,6 +98,8 @@ const Maps = () => {
         latitudeDelta: 0.03,
         longitudeDelta: 0.03,
     },1000);
+    }else{
+      alert("CIUDAD NO DISPOBLE  EN EL MOMENTO, SE NECESITA UNA API PARA OBTENER TODAS LAS CIUDADES :( ")
     }
   };
 
