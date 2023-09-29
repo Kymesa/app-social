@@ -90,7 +90,7 @@ const Maps = () => {
   };
 
   //? INPUT SEARCH
-  const onInputSearch = () => {
+  const searchPlaces = () => {
     // if (doctors | stores | enginners) {
     //   setDoctors(false);
     //   setStore(false);
@@ -115,9 +115,7 @@ const Maps = () => {
     //     setInputText("");
     //     break;
     // }
-
-
-
+    if(!inputText.trim().length) return ;
   };
 
   const handleEvent = (e, dataDB) => {
@@ -202,7 +200,7 @@ const Maps = () => {
                 // p={2}
                 focusBorderColor="blue700"
                 suffix={
-                  <TouchableOpacity onPress={onInputSearch}>
+                  <TouchableOpacity onPress={searchPlaces}>
                     <Icon
                       fontSize={20}
                       name="search"
