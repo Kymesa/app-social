@@ -34,39 +34,49 @@ const Maps = () => {
   // const [markerId, setMarkerId] = useState(0)
   const [arrMarker, setArrMarker] = useState(null)
 
-  const getLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      // alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!, TU POSICION (INICIAL) SERA EN MEDELLIN, 'ACTIVA LOS PERMISOS DE UBICACION EN AJUSTES O LIMPIA LA DATA DE LA APP' ");
-      // setInitialRegion({
-      //   longitude: -75.5635900,
-      //   latitude: 6.2518400,
-      //   latitudeDelta: 0.3,
-      //   longitudeDelta: 0.3,
-      // });
-      // setMarkers({
-      //   longitude: -75.5635900,
-      //   latitude: 6.2518400,
-      // });
-      return;
-    }
+  // const getLocation = async () => {
+  //   let { status } = await Location.requestForegroundPermissionsAsync();
+  //   if (status !== "granted") {
+  //     // alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!, TU POSICION (INICIAL) SERA EN MEDELLIN, 'ACTIVA LOS PERMISOS DE UBICACION EN AJUSTES O LIMPIA LA DATA DE LA APP' ");
+  //     // setInitialRegion({
+  //     //   longitude: -75.5635900,
+  //     //   latitude: 6.2518400,
+  //     //   latitudeDelta: 0.3,
+  //     //   longitudeDelta: 0.3,
+  //     // });
+  //     // setMarkers({
+  //     //   longitude: -75.5635900,
+  //     //   latitude: 6.2518400,
+  //     // });
+  //     return;
+  //   }
 
-    let locationGet = await Location.getCurrentPositionAsync({});
-    setInitialRegion({
-      latitude: locationGet.coords.latitude,
-      longitude: locationGet.coords.longitude,
-      latitudeDelta: 0.03,
-      longitudeDelta: 0.03,
-    });
-    setMarkers({
-      latitude: locationGet.coords.latitude,
-      longitude: locationGet.coords.longitude,
-    });
-  };
+  //   let locationGet = await Location.getCurrentPositionAsync({});
+
+  // };
 
   useEffect(() => {
-    getLocation();
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        return;
+      }
+
+      let locationGet = await Location.getCurrentPositionAsync({});
+      setInitialRegion({
+        latitude: locationGet.coords.latitude,
+        longitude: locationGet.coords.longitude,
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.03,
+      });
+      setMarkers({
+        latitude: locationGet.coords.latitude,
+        longitude: locationGet.coords.longitude,
+      });
+    })();
   }, []);
+
+
 
   const handleCheck = (item) => {
     if (doctors | stores | enginners) {
@@ -98,8 +108,6 @@ const Maps = () => {
         latitudeDelta: 0.03,
         longitudeDelta: 0.03,
     },1000);
-    }else{
-      alert("CIUDAD NO DISPOBLE  EN EL MOMENTO, SE NECESITA UNA API PARA OBTENER TODAS LAS CIUDADES :( ")
     }
   };
 
@@ -116,6 +124,7 @@ const Maps = () => {
         {initialRegion &&  (
           <>
             <MapView
+            
             ref={mapView}
               customMapStyle={styleMap}
               showsCompass={false}
