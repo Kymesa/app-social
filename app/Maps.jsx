@@ -85,7 +85,7 @@ const Maps = () => {
         longitude: locationGet.coords.longitude,
       });
     })();
-  }, []);
+  }, [setInitialRegion]);
 
 
 
@@ -118,7 +118,7 @@ const Maps = () => {
         longitude: -73.24236273765565,
         latitudeDelta: 0.03,
         longitudeDelta: 0.03,
-    },1000);
+    },1000); 
     }
   };
 
@@ -158,7 +158,9 @@ const Maps = () => {
               {stores && <MarkerList dataDB={StoreDB} event={handleEvent}/>}
               {enginners && <MarkerList dataDB={EngginersDB} event={handleEvent}/>}
             </MapView>
-            <View
+          </>
+        )}
+         <View
               style={{
                 position: "absolute",
                 width: wp(100),
@@ -231,8 +233,6 @@ const Maps = () => {
             {stores && arrMarker && <ListCard dataDB={arrMarker} />}
             {doctors && arrMarker && <ListCard dataDB={arrMarker} />}
             {enginners && arrMarker && <ListCard dataDB={arrMarker} />}
-          </>
-        )}
       </View>
     </>
   );
