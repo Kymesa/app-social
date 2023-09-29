@@ -59,20 +59,9 @@ const Maps = () => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
+        console.log("HOLIS");
         return;
       }
-
-      setInitialRegion({
-        latitude: 6.230833,
-        longitude: -75.590553,
-        latitudeDelta: 0.03,
-        longitudeDelta: 0.03,
-      });
-      setMarkers({
-        latitude: 6.230833,
-        longitude: -75.590553,
-      });
-
       let locationGet = await Location.getCurrentPositionAsync({});
       setInitialRegion({
         latitude: locationGet.coords.latitude,
