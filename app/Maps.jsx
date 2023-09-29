@@ -1,5 +1,5 @@
 // ? RN UTILIZADOS
-import React, { useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { View, Text, TouchableOpacity, Pressable } from "react-native";
 // ? LIBRERIA PARA OBTENER LA ALTURA Y ANCHO DE LA PANTALLA
@@ -59,19 +59,19 @@ const Maps = () => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        let locationGet = await Location.getCurrentPositionAsync({});
-        setInitialRegion({
-          latitude: locationGet.coords.latitude,
-          longitude: locationGet.coords.longitude,
-          latitudeDelta: 0.03,
-          longitudeDelta: 0.03,
-        });
-        setMarkers({
-          latitude: locationGet.coords.latitude,
-          longitude: locationGet.coords.longitude,
-        });
         return;
       }
+
+      setInitialRegion({
+        latitude:6.230833,
+        longitude: -75.590553,
+        latitudeDelta: 0.03,
+        longitudeDelta: 0.03,
+      });
+      setMarkers({
+        latitude:6.230833,
+        longitude:-75.590553,
+      });
 
       let locationGet = await Location.getCurrentPositionAsync({});
       setInitialRegion({
@@ -85,7 +85,7 @@ const Maps = () => {
         longitude: locationGet.coords.longitude,
       });
     })();
-  }, [setInitialRegion]);
+  }, [arrMarker]);
 
 
 
@@ -132,34 +132,35 @@ const Maps = () => {
   return (
     <>
       <View style={{ flex: 1 }}>
-        {initialRegion &&  (
+        { initialRegion && (
           <>
-            <MapView
-            
+          <MapView
+          
             ref={mapView}
-              customMapStyle={styleMap}
-              showsCompass={false}
-              loadingIndicatorColor="red"
-              loadingEnabled={true}
-              provider={PROVIDER_GOOGLE}
-              initialRegion={initialRegion}
-              style={{ width: wp(100), height: hp(100) }}
-            >
-              <Circle
-                center={markers}
-                radius={8}
-                strokeWidth={5}
-                strokeColor="tomato"
-              />
+            customMapStyle={styleMap}
+            showsCompass={false}
+            loadingIndicatorColor="red"
+            loadingEnabled={true}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={initialRegion}
+            style={{ width: wp(100), height: hp(100) }}
+          >
+            <Circle
+              center={markers}
+              radius={8}
+              strokeWidth={5}
+              strokeColor="tomato"
+            />
 
-              <Marker coordinate={markers} title="I'm Here" />
+            <Marker coordinate={markers} title="I'm Here" />
 
-              {doctors && <MarkerList dataDB={DoctorsDB} event={handleEvent}/>}
-              {stores && <MarkerList dataDB={StoreDB} event={handleEvent}/>}
-              {enginners && <MarkerList dataDB={EngginersDB} event={handleEvent}/>}
-            </MapView>
-          </>
-        )}
+            {doctors && <MarkerList dataDB={DoctorsDB} event={handleEvent}/>}
+            {stores && <MarkerList dataDB={StoreDB} event={handleEvent}/>}
+            {enginners && <MarkerList dataDB={EngginersDB} event={handleEvent}/>}
+          </MapView>
+        </>
+        ) }
+          
          <View
               style={{
                 position: "absolute",
