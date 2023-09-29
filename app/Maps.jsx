@@ -137,37 +137,6 @@ const Maps = () => {
               {doctors && <MarkerList dataDB={DoctorsDB} event={handleEvent}/>}
               {stores && <MarkerList dataDB={StoreDB} event={handleEvent}/>}
               {enginners && <MarkerList dataDB={EngginersDB} event={handleEvent}/>}
-
-              {/* {doctors
-                ? DoctorsDB.map((m, i) => (
-                    <Marker
-                      key={i}
-                      coordinate={m.cordinate}
-                      title={m.title}
-                      image={{ uri: m.imgUrl }}
-                    />
-                  ))
-                : null} */}
-              {/* {stores
-                ? StoreDB.map((m, i) => (
-                    <Marker
-                      key={i}
-                      coordinate={m.cordinate}
-                      title={m.title}
-                      image={{ uri: m.imgUrl }}
-                    />
-                  ))
-                : null}
-              {enginners
-                ? EngginersDB.map((m, i) => (
-                    <Marker
-                      key={i}
-                      coordinate={m.cordinate}
-                      title={m.title}
-                      image={{ uri: m.imgUrl }}
-                    />
-                  ))
-                : null} */}
             </MapView>
             <View
               style={{
