@@ -1,4 +1,4 @@
-import { FlatList } from "react-native-gesture-handler";
+import {  ScrollView } from "react-native-gesture-handler";
 import { Icon, Image } from "react-native-magnus";
 import {
   widthPercentageToDP as wp,
@@ -7,25 +7,23 @@ import {
 import StarRating from "./Rating";
 import { View, Text } from "react-native";
 const ListCard = ({ dataDB }) => {
+
   return (
-    <>
+  
       <View
         style={{
           position: "absolute",
           top: hp(82),
-          left: wp(2),
+          // left: wp(12),
+          marginHorizontal: wp(12),
         }}
       >
-        <FlatList
+        <ScrollView
           horizontal
-          showsHorizontalScrollIndicator={false}
-          data={dataDB}
-          key={(dataDB) => dataDB}
-          style={{ marginRight: 20 }}
-          renderItem={({ item }) => (
-            <View
+          showsHorizontalScrollIndicator={false}>
+              <View
               style={{
-                width: wp(60),
+                width: wp(70),
                 backgroundColor: "white",
                 marginHorizontal: 10,
                 height: hp(10),
@@ -42,13 +40,13 @@ const ListCard = ({ dataDB }) => {
                   mt={5}
                   rounded={10}
                   source={{
-                    uri: item.imgUrl,
+                    uri: dataDB.imgUrl,
                   }}
                 />
               </View>
               <View style={{ marginLeft: wp(3) }}>
                 <Text style={{ fontWeight: "bold", marginTop: hp(1.5) }}>
-                  {item.title}
+                  {dataDB.title}
                 </Text>
                 <View
                   style={{
@@ -70,14 +68,13 @@ const ListCard = ({ dataDB }) => {
                   <Text style={{ color: "#444", fontSize: 12 }}>2.5 Km</Text>
                 </View>
                 <View>
-                  <StarRating ratings={item.rating} reviews={10} />
+                  <StarRating ratings={dataDB.rating} reviews={10} />
                 </View>
               </View>
             </View>
-          )}
-        />
+          </ScrollView>
       </View>
-    </>
+    
   );
 };
 

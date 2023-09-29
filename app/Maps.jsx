@@ -30,6 +30,8 @@ const Maps = () => {
   const [doctors, setDoctors] = useState(false);
   const [stores, setStore] = useState(false);
   const [enginners, setEnginners] = useState(false);
+  // const [markerId, setMarkerId] = useState(0)
+  const [arrMarker, setArrMarker] = useState(null)
 
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync({});
@@ -70,6 +72,7 @@ const Maps = () => {
       setDoctors(false);
       setStore(false);
       setEnginners(false);
+      setArrMarker(null)
     }
     switch (item) {
       case "Doctors":
@@ -88,31 +91,42 @@ const Maps = () => {
 
   //? INPUT SEARCH
   const onInputSearch = () => {
-    if (doctors | stores | enginners) {
-      setDoctors(false);
-      setStore(false);
-      setEnginners(false);
-    }
-    switch (inputText.toLowerCase()) {
-      case "doc":
-      case "doctor":
-      case "doctors":
-        setDoctors(!doctors);
-        break;
-      case "store":
-        setStore(!stores);
-        break;
-      case "eng":
-      case "engginer":
-      case "engginers":
-        setEnginners(!enginners);
-        break;
-      default:
-        alert("No coincide tu busqueda, con los check disponibles");
-        setInputText("");
-        break;
-    }
+    // if (doctors | stores | enginners) {
+    //   setDoctors(false);
+    //   setStore(false);
+    //   setEnginners(false);
+    // }
+    // switch (inputText.toLowerCase()) {
+    //   case "doc":
+    //   case "doctor":
+    //   case "doctors":
+    //     setDoctors(!doctors);
+    //     break;
+    //   case "store":
+    //     setStore(!stores);
+    //     break;
+    //   case "eng":
+    //   case "engginer":
+    //   case "engginers":
+    //     setEnginners(!enginners);
+    //     break;
+    //   default:
+    //     alert("No coincide tu busqueda, con los check disponibles");
+    //     setInputText("");
+    //     break;
+    // }
+
+
+
   };
+
+  const handleEvent = (e, dataDB) => {
+    const markeId = e._targetInst.return.key
+    const dataMarker = dataDB.find((m) => {
+      return m.id == markeId
+    })
+    setArrMarker(dataMarker)
+  }
   return (
     <>
       <View style={{ flex: 1 }}>
@@ -136,9 +150,9 @@ const Maps = () => {
 
               <Marker coordinate={markers} title="I'm Here" />
 
-              {doctors && <MarkerList dataDB={DoctorsDB} />}
-              {stores && <MarkerList dataDB={StoreDB} />}
-              {enginners && <MarkerList dataDB={EngginersDB} />}
+              {doctors && <MarkerList dataDB={DoctorsDB} event={handleEvent}/>}
+              {stores && <MarkerList dataDB={StoreDB} event={handleEvent}/>}
+              {enginners && <MarkerList dataDB={EngginersDB} event={handleEvent}/>}
 
               {/* {doctors
                 ? DoctorsDB.map((m, i) => (
@@ -241,9 +255,9 @@ const Maps = () => {
                 )}
               />
             </View>
-            {stores && <ListCard dataDB={StoreDB} />}
-            {doctors && <ListCard dataDB={DoctorsDB} />}
-            {enginners && <ListCard dataDB={EngginersDB} />}
+            {stores && arrMarker && <ListCard dataDB={arrMarker} />}
+            {doctors && arrMarker && <ListCard dataDB={arrMarker} />}
+            {enginners && arrMarker && <ListCard dataDB={arrMarker} />}
           </>
         ) : null}
       </View>
