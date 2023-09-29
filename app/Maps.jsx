@@ -37,7 +37,7 @@ const Maps = () => {
   const getLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
-      alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!, TU POSICION (INICIAL) SERA EN MEDELLIN, 'ACTIVA LOS PERMISOS DE UBICACION EN AJUSTES O LIMPIA LA DATA DE LA APP' ");
+      // alert("NO ACEPTASTE LOS PERMISOS DE UBICACION, NO FUNCIONARA!!!, TU POSICION (INICIAL) SERA EN MEDELLIN, 'ACTIVA LOS PERMISOS DE UBICACION EN AJUSTES O LIMPIA LA DATA DE LA APP' ");
       // setInitialRegion({
       //   longitude: -75.5635900,
       //   latitude: 6.2518400,
