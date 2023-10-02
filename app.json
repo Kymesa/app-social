@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app-social",
-    "slug": "app-social",
+    "name": "social-app-movil",
+    "slug": "social-app-movil",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,52 +12,19 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
     "android": {
-      "versionCode": "1.0.0",
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyAq8l0iwcF6X5ptFdcbzMfKzS9ClXxVAA0"
-        }
-      },
-      "permissions": [
-        "FOREGROUND_SERVICE",
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_BACKGROUND_LOCATION"
-      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.keiner.appsocial"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      ["expo-router"],
-      [
-        "expo-location",
-        {
-          "isAndroidBackgroundLocationEnabled": true
-        }
-      ]
-    ],
-    "scheme": "app-social",
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "faa88bd3-d846-4e16-9382-944a014d27b3"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/faa88bd3-d846-4e16-9382-944a014d27b3"
-    },
-    "ios": {}
+    "plugins": ["expo-router"],
+    "scheme": "social-app-movil"
   }
 }
