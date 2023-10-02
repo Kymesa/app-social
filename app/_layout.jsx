@@ -108,7 +108,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="Peoples"
+        name="Shop"
         options={{
           headerTitleAlign: "center",
           tabBarIcon: () => (
