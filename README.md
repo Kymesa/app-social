@@ -7,3 +7,4 @@
 # npx expo start
 
 #ERROR TYPE RESOLVIDO xd
+#MODIFICO EL README
