@@ -11,12 +11,12 @@ const InputSearch = () => {
       style={{
         marginTop: 20,
         flexDirection: "row",
-        marginHorizontal: wp(6.5),
-        gap: 20,
+        gap: 12,
+        alignItems: "center",
       }}
     >
       <Input
-        w={wp(75)}
+        w={wp(78)}
         bg="#F6F6F8"
         placeholder="Search Here..."
         p={10}
