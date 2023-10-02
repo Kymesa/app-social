@@ -6,4 +6,4 @@
 
 # npx expo start
 
-#ERROR TYPE RESOLVIDO
+#ERROR TYPE RESOLVIDO xd
