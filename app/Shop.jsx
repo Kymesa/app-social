@@ -1,10 +1,15 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import React from "react";
-
+import InputSearch from "../components/Shop/InputSearch";
 export default function Peoples() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <Text>.... HOLIS</Text>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        <InputSearch />
+      </ScrollView>
     </SafeAreaView>
   );
 }

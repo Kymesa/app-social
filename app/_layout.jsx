@@ -150,7 +150,7 @@ export default function Layout() {
           headerLeft: () => (
             <TouchableOpacity onPress={() => alert("PRES")}>
               <Icon
-                shadow={"xl"}
+                shadow={"md"}
                 borderWidth={1}
                 bg="white"
                 borderColor="white"
@@ -170,7 +170,7 @@ export default function Layout() {
                 <Badge bg="red500" right={20} top={-2} h={13} w={13}>
                   <Icon
                     p={3}
-                    shadow={"xl"}
+                    shadow={"md"}
                     borderWidth={1}
                     bg="white"
                     borderColor="white"
