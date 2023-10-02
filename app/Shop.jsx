@@ -1,10 +1,10 @@
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 
 export default function Peoples() {
   return (
-    <View>
-      <Text>Peoples</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <Text>.... HOLIS</Text>
+    </SafeAreaView>
   );
 }
