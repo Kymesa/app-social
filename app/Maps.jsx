@@ -157,7 +157,7 @@ const Maps = () => {
           style={{
             position: "absolute",
             width: wp(100),
-            marginTop: hp(12),
+            marginTop: hp(14),
             paddingHorizontal: 20,
           }}
         >
@@ -185,7 +185,7 @@ const Maps = () => {
           style={{
             position: "absolute",
             width: wp(90),
-            marginTop: hp(21),
+            marginTop: hp(22),
             marginHorizontal: 20,
           }}
         >
