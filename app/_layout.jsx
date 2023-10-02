@@ -113,29 +113,12 @@ export default function Layout() {
           headerTitleAlign: "center",
           tabBarIcon: () => (
             <Icon
-              name="people-outline"
+              name="shopping-bag"
               color="black"
               h={40}
               w={40}
-              fontSize={32}
-              fontFamily="Ionicons"
-              rounded="md"
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Messages"
-        options={{
-          headerTitleAlign: "center",
-          tabBarIcon: () => (
-            <Icon
-              name="message1"
-              color="black"
               fontSize={30}
-              h={40}
-              w={40}
-              fontFamily="AntDesign"
+              fontFamily="Feather"
               rounded="md"
             />
           ),
