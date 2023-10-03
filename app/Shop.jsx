@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native";
 import React from "react";
 import {
   widthPercentageToDP as wp,
@@ -7,6 +7,7 @@ import {
 import InputSearch from "../components/Shop/InputSearch/InputSearch";
 import Banner from "../components/Shop/Banner/Banner";
 import Products from "../components/Shop/Products/Products";
+import { ScrollView } from "react-native-virtualized-view";
 export default function Peoples() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>

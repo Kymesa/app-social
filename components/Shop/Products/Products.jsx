@@ -1,6 +1,12 @@
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import React, { useEffect, useState } from "react";
 import ProductsData from "./productsData";
+import ProductCard from "./ProductCard";
+import { ActivityIndicator } from "react-native";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -18,13 +24,11 @@ const Products = () => {
       const filterProducts = ProductsData.filter(
         (p) => p.categoty == selectCategories
       );
+
       setListDataCategories(filterProducts);
     };
     filterSelect();
   }, [selectCategories]);
-
-  console.log(listDataCategories);
-
   return (
     <>
       <View style={{ marginTop: 18 }}>
@@ -58,12 +62,17 @@ const Products = () => {
         />
       </View>
 
-      {listDataCategories &&
-        listDataCategories.map((p) => (
-          <View key={p.id}>
-            <Text>{p.name}</Text>
-          </View>
-        ))}
+      {listDataCategories && (
+        <View style={{ width: wp(92) }}>
+          <FlatList
+            data={listDataCategories}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            key={(listDataCategories) => listDataCategories.id}
+            renderItem={({ item }) => <ProductCard product={item} />}
+          />
+        </View>
+      )}
     </>
   );
 };

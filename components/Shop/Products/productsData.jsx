@@ -19,15 +19,6 @@ export default products = [
       "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   {
-    id: 3,
-    name: "Samsung Galaxy J5",
-    price: 150,
-    categoty: "Smartphones",
-    rating: 3.1,
-    imgUrl:
-      "https://images.pexels.com/photos/214487/pexels-photo-214487.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
-  {
     id: 4,
     name: "Samsung Gaxaly Z FLI",
     price: 1500,
