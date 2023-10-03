@@ -45,7 +45,7 @@ export default function Layout() {
             />
           ),
           headerTintColor: "rgba(215,121,255,1)",
-          title: "Friendy",
+          title: "Friendy V10",
           tabBarLabel: "Feed",
           tabBarIcon: () => (
             <Icon
