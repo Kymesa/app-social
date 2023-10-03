@@ -7,6 +7,7 @@ import {
 import InputSearch from "../components/Shop/InputSearch/InputSearch";
 import Banner from "../components/Shop/Banner/Banner";
 import Categories from "../components/Shop/Category/Categories";
+import Products from "../components/Shop/Products/Products";
 export default function Peoples() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -18,6 +19,7 @@ export default function Peoples() {
         <InputSearch />
         <Banner />
         <Categories />
+        <Products />
       </ScrollView>
     </SafeAreaView>
   );
