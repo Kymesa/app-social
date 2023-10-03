@@ -5,7 +5,7 @@ const categoriesList = [
   "Laptops",
   "Smartphones",
   "watchs",
-  "Smart Warch",
+  "Smart Watch",
   "Apple",
   "Cars",
 ];
@@ -30,7 +30,10 @@ const Categories = () => {
               }}
             >
               <Text
-                style={{ color: selectCategories == item ? "white" : "black" }}
+                style={{
+                  color: selectCategories == item ? "white" : "black",
+                  fontWeight: "bold",
+                }}
               >
                 {item}
               </Text>
