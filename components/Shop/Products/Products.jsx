@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, Button } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Alert } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import ProductsData from "./productsData";
 import ProductCard from "./ProductCard";
 import Modal from "react-native-modal";
-import { Icon, Image } from "react-native-magnus";
+import { Button, Icon, Image } from "react-native-magnus";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -22,9 +22,6 @@ const Products = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [productSelectModal, setProductSeleteModal] = useState(null);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
   useEffect(() => {
     const filterSelect = () => {
       const filterProducts = ProductsData.filter(
@@ -39,6 +36,10 @@ const Products = () => {
   const eventProductSelect = (item) => {
     setModalVisible(true);
     setProductSeleteModal(item);
+  };
+
+  const handleCartAddProduct = (productAddCard) => {
+    Alert.alert(JSON.stringify(productAddCard));
   };
 
   return (
@@ -171,6 +172,57 @@ const Products = () => {
                 >
                   ${"10.000"}
                 </Text>
+              </View>
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 17,
+                  fontWeight: "800",
+                  marginTop: 15,
+                }}
+              >
+                Descripcion del producto
+              </Text>
+              <Text
+                style={{
+                  marginHorizontal: wp(6),
+                  fontWeight: "600",
+                  fontSize: 15,
+                  lineHeight: 25,
+                }}
+              >
+                {"\n"} ✅ Lorem ipsum dolor sit amet consectetur adipisicing .
+                {"\n"} ✅ Illo molestiae, blanditiis ea quos laborum nemo beatae{" "}
+                .{"\n"} ✅ voluptatem asperiores ipsam saepe recusandae. {"\n"}{" "}
+                ✅ quas quia necessitatibus suscipit placeat.
+              </Text>
+              <View
+                style={{
+                  position: "absolute",
+                  bottom: hp(8),
+                  alignSelf: "center",
+                }}
+              >
+                <Button
+                  onPress={() => handleCartAddProduct(productSelectModal)}
+                  // mt="lg"
+                  // px="xl"
+                  // py="lg"
+                  bg="#28D885"
+                  color="white"
+                  fontWeight="bold"
+                  suffix={
+                    <Icon
+                      name="cart-plus"
+                      ml="md"
+                      color="white"
+                      fontFamily="FontAwesome"
+                      fontSize={20}
+                    />
+                  }
+                >
+                  Contact Us
+                </Button>
               </View>
             </View>
           </Modal>
