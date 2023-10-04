@@ -205,10 +205,7 @@ const Products = () => {
                 }}
               >
                 <Button
-                  // onPress={() => router.push("/product/123")}
-                  // mt="lg"
-                  // px="xl"
-                  // py="lg"
+                  onPress={() => handleCartAddProduct(productSelectModal)}
                   bg="#28D885"
                   color="white"
                   fontWeight="bold"
