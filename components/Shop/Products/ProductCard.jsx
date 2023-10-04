@@ -1,53 +1,53 @@
-import { View, Pressable, StyleSheet, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
 import { Text, Image, Icon } from "react-native-magnus";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-export default function ProductCard({ product }) {
-  const [love, setLove] = useState(false);
-  const handleClickLike = () => {
-    setLove(!love);
-  };
+export default function ProductCard({ product, eventProduct }) {
   return (
-    // <Pressable>
     <View style={styles.container}>
       <View style={styles.fondo}>
-        <TouchableOpacity onPress={handleClickLike}>
-          <Icon
-            position="absolute"
-            right={0}
-            top={0}
-            name="heart"
-            color={love ? "red600" : "gray600"}
-            fontSize={25}
-            fontFamily="AntDesign"
+        <TouchableOpacity onPress={() => eventProduct(product)}>
+          <Image
+            h={100}
+            // zIndex={1}
+
+            resizeMode="contain"
+            borderWidth={1}
+            borderColor="gray300"
+            rounded="lg"
+            w="100%"
+            source={{
+              uri: product.imgUrl,
+            }}
           />
         </TouchableOpacity>
-
-        <Image
-          h={100}
-          // zIndex={1}
-          zIndex={-99}
-          resizeMode="contain"
-          borderWidth={1}
-          borderColor="gray300"
-          rounded="lg"
-          w="100%"
-          source={{
-            uri: product.imgUrl,
-          }}
-        />
       </View>
       <Text fontWeight="bold" fontSize={15} textAlign="center">
         {product.name}
       </Text>
-      <Text fontWeight="bold" ml={5} my={3}>
-        ${product.price}
-      </Text>
+      <View
+        style={{
+          marginTop: 5,
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        <Text fontWeight="bold" ml={5} my={3}>
+          ${product.price}
+        </Text>
+        <View style={{ flexDirection: "row" }}>
+          <Icon
+            name="star"
+            color="yellow500"
+            fontSize={15}
+            fontFamily="FontAwesome"
+          />
+          <Text fontWeight="bold" ml={5}>
+            ${product.rating}
+          </Text>
+        </View>
+      </View>
     </View>
-    // </Pressable>
   );
 }
 
