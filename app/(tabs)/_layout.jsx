@@ -3,6 +3,7 @@ import { Badge, Icon, Image } from "react-native-magnus";
 import { BtnHeaderScreen } from "../../components/BtnHeader/BtnHeaderScreen";
 import BtnHeaderMaps from "../../components/BtnHeader/BtnHeaderMaps";
 import { Text, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
 const cartLenght = 0;
 export default function Layout() {
   return (
@@ -168,7 +169,7 @@ export default function Layout() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <TouchableOpacity onPress={() => alert("PRES")}>
+            <TouchableOpacity onPress={() => router.push("/product/cart")}>
               {cartLenght > 0 ? (
                 <Badge bg="red500" right={20} top={-4} h={11} w={11}>
                   <Icon

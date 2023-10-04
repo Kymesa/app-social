@@ -205,7 +205,7 @@ const Products = () => {
                 }}
               >
                 <Button
-                  // onPress={() => router.push("/card/123")}
+                  // onPress={() => router.push("/product/123")}
                   // mt="lg"
                   // px="xl"
                   // py="lg"
@@ -222,7 +222,7 @@ const Products = () => {
                     />
                   }
                 >
-                  Contact Us
+                  Add Cart
                 </Button>
               </View>
             </View>
