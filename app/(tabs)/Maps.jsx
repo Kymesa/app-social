@@ -14,15 +14,15 @@ import * as Location from "expo-location";
 // ? FRAMEWORK CSS MAGNUS
 import { Icon, Input } from "react-native-magnus";
 // ? DB - DOC - STORE - ENG
-import { DoctorsDB } from "../components/Maps/DB/DoctorsDB";
-import { StoreDB } from "../components/Maps/DB/StoreDB";
-import { EngginersDB } from "../components/Maps/DB/EnginnersDB";
+import { DoctorsDB } from "../../components/Maps/DB/DoctorsDB";
+import { StoreDB } from "../../components/Maps/DB/StoreDB";
+import { EngginersDB } from "../../components/Maps/DB/EnginnersDB";
 // ? CHECK LISTS
-import { checkList } from "../components/Maps/DB/CheckList";
+import { checkList } from "../../components/Maps/DB/CheckList";
 //? STYLE MAP
-import { styleMap } from "../components/Maps/StyleMap";
-import ListCard from "../components/Maps/ListCard";
-import MarkerList from "../components/Maps/MarkerList";
+import { styleMap } from "../../components/Maps/StyleMap";
+import ListCard from "../../components/Maps/ListCard";
+import MarkerList from "../../components/Maps/MarkerList";
 const Maps = () => {
   const mapView = useRef(null);
   const [initialRegion, setInitialRegion] = useState(null);

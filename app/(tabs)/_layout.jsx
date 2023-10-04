@@ -1,9 +1,8 @@
 import { Tabs } from "expo-router/tabs";
 import { Badge, Icon, Image } from "react-native-magnus";
-import { BtnHeaderScreen } from "../components/BtnHeader/BtnHeaderScreen";
-import BtnHeaderMaps from "../components/BtnHeader/BtnHeaderMaps";
+import { BtnHeaderScreen } from "../../components/BtnHeader/BtnHeaderScreen";
+import BtnHeaderMaps from "../../components/BtnHeader/BtnHeaderMaps";
 import { Text, TouchableOpacity, View } from "react-native";
-
 const cartLenght = 0;
 export default function Layout() {
   return (
@@ -21,13 +20,16 @@ export default function Layout() {
         },
         tabBarInactiveTintColor: "gray",
         tabBarActiveTintColor: "black",
+        headerStatusBarHeight: 0,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           headerShadowVisible: false,
-          headerLeftContainerStyle: { marginLeft: 5 },
+          headerLeftContainerStyle: {
+            marginLeft: 5,
+          },
           headerTitleStyle: {
             fontWeight: "bold",
             fontSize: 26,

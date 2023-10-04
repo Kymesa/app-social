@@ -1,10 +1,10 @@
 import { View, ScrollView, SafeAreaView } from "react-native";
 import React from "react";
-import { Whats } from "../components/HomeApp/Whats";
-import { Todo } from "../components/HomeApp/Todo";
-import Online from "../components/HomeApp/Online";
-import History from "../components/HomeApp/History";
-import CardPost from "../components/HomeApp/CardPost";
+import { Whats } from "../../components/HomeApp/Whats";
+import { Todo } from "../../components/HomeApp/Todo";
+import Online from "../../components/HomeApp/Online";
+import History from "../../components/HomeApp/History";
+import CardPost from "../../components/HomeApp/CardPost";
 export default function Feed() {
   const postPublish = [
     {
