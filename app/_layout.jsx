@@ -168,7 +168,7 @@ export default function Layout() {
           headerRight: () => (
             <TouchableOpacity onPress={() => alert("PRES")}>
               {cartLenght > 0 ? (
-                <Badge bg="red500" right={20} top={-2} h={13} w={13}>
+                <Badge bg="red500" right={20} top={-4} h={11} w={11}>
                   <Icon
                     p={3}
                     shadow={"md"}

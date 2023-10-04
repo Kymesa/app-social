@@ -8,6 +8,7 @@ import ProductsData from "./productsData";
 import ProductCard from "./ProductCard";
 import Modal from "react-native-modal";
 import { Button, Icon, Image } from "react-native-magnus";
+import { Link, router } from "expo-router";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -192,7 +193,7 @@ const Products = () => {
                 }}
               >
                 {"\n"} ✅ Lorem ipsum dolor sit amet consectetur adipisicing .
-                {"\n"} ✅ Illo molestiae, blanditiis ea quos laborum nemo beatae{" "}
+                {"\n"} ✅ Illo molestiae, blanditiis ea quos laborum nemo beatae
                 .{"\n"} ✅ voluptatem asperiores ipsam saepe recusandae. {"\n"}{" "}
                 ✅ quas quia necessitatibus suscipit placeat.
               </Text>
@@ -204,7 +205,7 @@ const Products = () => {
                 }}
               >
                 <Button
-                  onPress={() => handleCartAddProduct(productSelectModal)}
+                  // onPress={() => router.push("/card/123")}
                   // mt="lg"
                   // px="xl"
                   // py="lg"
