@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductsData from "./productsData";
 import ProductCard from "./ProductCard";
 import Modal from "react-native-modal";
@@ -12,8 +12,8 @@ import {
   ALERT_TYPE,
   Dialog,
   AlertNotificationRoot,
-  Toast,
 } from "react-native-alert-notification";
+import { ModalCartContext } from "../contexts/ModalCartContext";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -28,8 +28,8 @@ const Products = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [productSelectModal, setProductSeleteModal] = useState(null);
   const [cardProducts, setCardProducts] = useState([]);
-  const [shopModal, setShopModal] = useState(false);
-
+  const [modalCart, setModalCart] = useContext(ModalCartContext);
+  const [sumTotals, setSumTotals] = useState(0);
   useEffect(() => {
     const filterSelect = () => {
       const filterProducts = ProductsData.filter(
@@ -46,8 +46,13 @@ const Products = () => {
     setProductSeleteModal(item);
   };
 
+  useEffect(() => {
+    const sumTotal = cardProducts.reduce((a, b) => a + b.price, 0);
+    setSumTotals(sumTotal);
+  }, [cardProducts]);
+
   const handleCartAddProduct = (productAddCard) => {
-    setCardProducts([...cardProducts, productAddCard]);
+    setCardProducts([productAddCard, ...cardProducts]);
     Dialog.show({
       type: ALERT_TYPE.SUCCESS,
       title: "Success",
@@ -55,9 +60,10 @@ const Products = () => {
       button: "close",
       autoClose: 1000,
     });
-    console.log(cardProducts);
   };
-
+  // const handleClearCard = () => {
+  //   setCardProducts([]);
+  // };
   return (
     <>
       <View style={{ marginTop: 18 }}>
@@ -243,57 +249,65 @@ const Products = () => {
           </Modal>
         </View>
       )}
-      {cardProducts.length >= 1 && (
-        <View style={{ flex: 1 }}>
-          <Modal
-            animationIn={"fadeInUp"}
-            isVisible={shopModal}
-            style={{
-              backgroundColor: "white",
-              borderRadius: 20,
-            }}
-          >
-            <View style={{ flex: 1 }}>
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "row",
-                }}
+      <View style={{ flex: 1 }}>
+        <Modal
+          animationIn={"fadeInUp"}
+          isVisible={modalCart}
+          style={{
+            backgroundColor: "white",
+            borderRadius: 20,
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
+              <TouchableOpacity
+                style={{ position: "absolute", left: 10, top: 8 }}
+                onPress={() => setModalCart(!modalCart)}
               >
-                <TouchableOpacity
-                  style={{ position: "absolute", left: 10, top: 8 }}
-                  onPress={() => setShopModal(!shopModal)}
-                >
-                  <Icon
-                    name="close"
-                    color="black"
-                    fontSize={20}
-                    fontFamily="AntDesign"
-                    bg="gray300"
-                    p={7}
-                    rounded={"circle"}
-                  />
-                </TouchableOpacity>
-                <Text style={{ fontSize: 22, fontWeight: "800", marginTop: 8 }}>
-                  Cart
-                </Text>
-              </View>
-              {cardProducts.map((p, inx) => (
-                <Text
-                  key={`products-${inx}}`}
-                  style={{ marginTop: 45, fontWeight: "bold", fontSize: 19 }}
-                >
-                  {p.name}
-                </Text>
-              ))}
+                <Icon
+                  name="close"
+                  color="black"
+                  fontSize={20}
+                  fontFamily="AntDesign"
+                  bg="gray300"
+                  p={7}
+                  rounded={"circle"}
+                />
+              </TouchableOpacity>
+              <Text style={{ fontSize: 22, fontWeight: "800", marginTop: 8 }}>
+                Cart
+              </Text>
             </View>
-          </Modal>
-        </View>
-      )}
-      <TouchableOpacity onPress={() => setShopModal(!shopModal)}>
-        <Text>CARD</Text>
-      </TouchableOpacity>
+            {cardProducts.length >= 1 ? (
+              cardProducts.map((p, inx) => (
+                <View key={`products-${inx}`}>
+                  <Text
+                    style={{
+                      marginTop: 45,
+                      fontWeight: "bold",
+                      fontSize: 19,
+                    }}
+                  >
+                    {p.name}
+                  </Text>
+                </View>
+              ))
+            ) : (
+              <Text style={{ marginTop: 45, fontWeight: "bold", fontSize: 19 }}>
+                No hay productos en el carrito
+              </Text>
+            )}
+
+            <Text>TOTAL PRODUCTS: {sumTotals}</Text>
+          </View>
+        </Modal>
+      </View>
     </>
   );
 };

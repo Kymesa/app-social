@@ -1,11 +1,13 @@
 import { TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Input, Icon } from "react-native-magnus";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { ModalCartContext } from "../contexts/ModalCartContext";
 const InputSearch = () => {
+  const [modalCart, setModalCart] = useContext(ModalCartContext);
   return (
     <View
       style={{
@@ -32,7 +34,7 @@ const InputSearch = () => {
         }
       />
       <View style={{ backgroundColor: "#F6F6F8" }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setModalCart(!modalCart)}>
           <Icon
             p={5}
             name="shoppingcart"
