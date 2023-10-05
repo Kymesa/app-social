@@ -4,11 +4,13 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import React from "react";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native-virtualized-view";
 import { Icon } from "react-native-magnus";
 
 const cardProduct = () => {
+  const { cart } = useLocalSearchParams();
+  console.log(cart);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>

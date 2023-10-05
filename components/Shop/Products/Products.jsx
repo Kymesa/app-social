@@ -14,6 +14,7 @@ import {
   AlertNotificationRoot,
 } from "react-native-alert-notification";
 import { ModalCartContext } from "../contexts/ModalCartContext";
+import { Link } from "expo-router";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -52,13 +53,13 @@ const Products = () => {
   }, [cardProducts]);
 
   const handleCartAddProduct = (productAddCard) => {
-    setCardProducts([productAddCard, ...cardProducts]);
+    setCardProducts([...cardProducts, productAddCard]);
     Dialog.show({
       type: ALERT_TYPE.SUCCESS,
       title: "Success",
       textBody: "Congrats! this is dialog box success",
       button: "close",
-      autoClose: 1000,
+      autoClose: 8000,
     });
   };
   // const handleClearCard = () => {
@@ -304,7 +305,15 @@ const Products = () => {
               </Text>
             )}
 
-            <Text>TOTAL PRODUCTS: {sumTotals}</Text>
+            <Text>TOTAL PRODUCTS: ${sumTotals}</Text>
+            <Link
+              href={{
+                pathname: "/(product)/(cart)",
+                params: { cart: JSON.stringify(cardProducts) },
+              }}
+            >
+              <Text>CHECKOUT</Text>
+            </Link>
           </View>
         </Modal>
       </View>
