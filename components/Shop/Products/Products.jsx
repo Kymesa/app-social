@@ -8,7 +8,12 @@ import ProductsData from "./productsData";
 import ProductCard from "./ProductCard";
 import Modal from "react-native-modal";
 import { Button, Icon, Image } from "react-native-magnus";
-import { Link, router } from "expo-router";
+import {
+  ALERT_TYPE,
+  Dialog,
+  AlertNotificationRoot,
+  Toast,
+} from "react-native-alert-notification";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -22,6 +27,8 @@ const Products = () => {
   const [listDataCategories, setListDataCategories] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [productSelectModal, setProductSeleteModal] = useState(null);
+  const [cardProducts, setCardProducts] = useState([]);
+  const [shopModal, setShopModal] = useState(false);
 
   useEffect(() => {
     const filterSelect = () => {
@@ -40,7 +47,15 @@ const Products = () => {
   };
 
   const handleCartAddProduct = (productAddCard) => {
-    Alert.alert(JSON.stringify(productAddCard));
+    setCardProducts([...cardProducts, productAddCard]);
+    Dialog.show({
+      type: ALERT_TYPE.SUCCESS,
+      title: "Success",
+      textBody: "Congrats! this is dialog box success",
+      button: "close",
+      autoClose: 1000,
+    });
+    console.log(cardProducts);
   };
 
   return (
@@ -204,28 +219,81 @@ const Products = () => {
                   alignSelf: "center",
                 }}
               >
-                <Button
-                  onPress={() => handleCartAddProduct(productSelectModal)}
-                  bg="#28D885"
-                  color="white"
-                  fontWeight="bold"
-                  suffix={
-                    <Icon
-                      name="cart-plus"
-                      ml="md"
-                      color="white"
-                      fontFamily="FontAwesome"
-                      fontSize={20}
-                    />
-                  }
-                >
-                  Add Cart
-                </Button>
+                <AlertNotificationRoot theme="light" dialogConfig={"autoClose"}>
+                  <Button
+                    onPress={() => handleCartAddProduct(productSelectModal)}
+                    bg="#28D885"
+                    color="white"
+                    fontWeight="bold"
+                    suffix={
+                      <Icon
+                        name="cart-plus"
+                        ml="md"
+                        color="white"
+                        fontFamily="FontAwesome"
+                        fontSize={20}
+                      />
+                    }
+                  >
+                    Add Cart
+                  </Button>
+                </AlertNotificationRoot>
               </View>
             </View>
           </Modal>
         </View>
       )}
+      {cardProducts.length >= 1 && (
+        <View style={{ flex: 1 }}>
+          <Modal
+            animationIn={"fadeInUp"}
+            isVisible={shopModal}
+            style={{
+              backgroundColor: "white",
+              borderRadius: 20,
+            }}
+          >
+            <View style={{ flex: 1 }}>
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <TouchableOpacity
+                  style={{ position: "absolute", left: 10, top: 8 }}
+                  onPress={() => setShopModal(!shopModal)}
+                >
+                  <Icon
+                    name="close"
+                    color="black"
+                    fontSize={20}
+                    fontFamily="AntDesign"
+                    bg="gray300"
+                    p={7}
+                    rounded={"circle"}
+                  />
+                </TouchableOpacity>
+                <Text style={{ fontSize: 22, fontWeight: "800", marginTop: 8 }}>
+                  Cart
+                </Text>
+              </View>
+              {cardProducts.map((p, inx) => (
+                <Text
+                  key={`products-${inx}}`}
+                  style={{ marginTop: 45, fontWeight: "bold", fontSize: 19 }}
+                >
+                  {p.name}
+                </Text>
+              ))}
+            </View>
+          </Modal>
+        </View>
+      )}
+      <TouchableOpacity onPress={() => setShopModal(!shopModal)}>
+        <Text>CARD</Text>
+      </TouchableOpacity>
     </>
   );
 };

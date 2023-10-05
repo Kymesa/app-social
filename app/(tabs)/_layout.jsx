@@ -3,7 +3,6 @@ import { Badge, Icon, Image } from "react-native-magnus";
 import { BtnHeaderScreen } from "../../components/BtnHeader/BtnHeaderScreen";
 import BtnHeaderMaps from "../../components/BtnHeader/BtnHeaderMaps";
 import { Text, TouchableOpacity, View } from "react-native";
-const cartLenght = 0;
 export default function Layout() {
   return (
     <Tabs
@@ -169,42 +168,27 @@ export default function Layout() {
           ),
           headerRight: () => (
             <TouchableOpacity>
-              {cartLenght > 0 ? (
-                <Badge bg="red500" right={20} top={-4} h={11} w={11}>
-                  <Icon
-                    p={3}
-                    shadow={"md"}
-                    borderWidth={1}
-                    bg="white"
-                    borderColor="white"
-                    rounded={"circle"}
-                    name="shoppingcart"
-                    mr={20}
-                    color="black"
-                    fontSize="6xl"
-                    fontFamily="AntDesign"
-                  />
-                </Badge>
-              ) : (
+              <Badge bg="red500" right={20} top={-4} h={11} w={11}>
                 <Icon
                   p={3}
-                  shadow={"xl"}
+                  shadow={"md"}
                   borderWidth={1}
                   bg="white"
                   borderColor="white"
                   rounded={"circle"}
-                  name="shoppingcart"
+                  name="notifications-outline"
                   mr={20}
                   color="black"
                   fontSize="6xl"
-                  fontFamily="AntDesign"
+                  fontFamily="Ionicons"
                 />
-              )}
+              </Badge>
             </TouchableOpacity>
           ),
           headerShadowVisible: false,
         }}
       />
+
       <Tabs.Screen
         name="Setting"
         options={{

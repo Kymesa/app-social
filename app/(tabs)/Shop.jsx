@@ -1,5 +1,5 @@
-import { SafeAreaView } from "react-native";
-import React from "react";
+import { SafeAreaView, TouchableOpacity, View, Text } from "react-native";
+import React, { useState } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -8,6 +8,8 @@ import InputSearch from "../../components/Shop/InputSearch/InputSearch";
 import Banner from "../../components/Shop/Banner/Banner";
 import Products from "../../components/Shop/Products/Products";
 import { ScrollView } from "react-native-virtualized-view";
+import { Icon, Image } from "react-native-magnus";
+import { Tabs } from "expo-router";
 export default function Peoples() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>

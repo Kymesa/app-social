@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Input, Icon } from "react-native-magnus";
 import {
@@ -32,13 +32,15 @@ const InputSearch = () => {
         }
       />
       <View style={{ backgroundColor: "#F6F6F8" }}>
-        <Icon
-          p={5}
-          name="sound-mix"
-          color="gray900"
-          fontFamily="Entypo"
-          fontSize={32}
-        />
+        <TouchableOpacity>
+          <Icon
+            p={5}
+            name="shoppingcart"
+            color="gray900"
+            fontFamily="AntDesign"
+            fontSize={32}
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
