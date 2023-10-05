@@ -14,7 +14,8 @@ import {
   AlertNotificationRoot,
 } from "react-native-alert-notification";
 import { ModalCartContext } from "../contexts/ModalCartContext";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { ScrollView } from "react-native-virtualized-view";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -29,8 +30,10 @@ const Products = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [productSelectModal, setProductSeleteModal] = useState(null);
   const [cardProducts, setCardProducts] = useState([]);
-  const [modalCart, setModalCart] = useContext(ModalCartContext);
+  const [modalCart, setModalCart, countCart, setCountCart] =
+    useContext(ModalCartContext);
   const [sumTotals, setSumTotals] = useState(0);
+
   useEffect(() => {
     const filterSelect = () => {
       const filterProducts = ProductsData.filter(
@@ -53,18 +56,23 @@ const Products = () => {
   }, [cardProducts]);
 
   const handleCartAddProduct = (productAddCard) => {
-    setCardProducts([...cardProducts, productAddCard]);
     Dialog.show({
       type: ALERT_TYPE.SUCCESS,
-      title: "Success",
-      textBody: "Congrats! this is dialog box success",
+      title: productAddCard.name,
+      textBody: "Producto agregado al carrito, Con exito!",
       button: "close",
       autoClose: 8000,
     });
+    setTimeout(() => {
+      setCardProducts([...cardProducts, productAddCard]);
+      setCountCart(countCart + 1);
+      setModalVisible(!isModalVisible);
+    }, 1000);
   };
   // const handleClearCard = () => {
   //   setCardProducts([]);
   // };
+
   return (
     <>
       <View style={{ marginTop: 18 }}>
@@ -115,11 +123,16 @@ const Products = () => {
       {productSelectModal && (
         <View style={{ flex: 1 }}>
           <Modal
+            // statusBarTranslucent={true}
+
             animationIn={"fadeInUp"}
             isVisible={isModalVisible}
             style={{
               backgroundColor: "white",
-              borderRadius: 20,
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              margin: 0,
+              marginTop: 20,
             }}
           >
             <View style={{ flex: 1 }}>
@@ -206,9 +219,10 @@ const Products = () => {
               >
                 Descripcion del producto
               </Text>
+
               <Text
                 style={{
-                  marginHorizontal: wp(6),
+                  marginHorizontal: wp(4),
                   fontWeight: "600",
                   fontSize: 15,
                   lineHeight: 25,
@@ -255,8 +269,11 @@ const Products = () => {
           animationIn={"fadeInUp"}
           isVisible={modalCart}
           style={{
-            backgroundColor: "white",
-            borderRadius: 20,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            margin: 0,
+            marginTop: 20,
+            backgroundColor: "#F6F7FD",
           }}
         >
           <View style={{ flex: 1 }}>
@@ -265,6 +282,7 @@ const Products = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "row",
+                marginBottom: 25,
               }}
             >
               <TouchableOpacity
@@ -281,38 +299,133 @@ const Products = () => {
                   rounded={"circle"}
                 />
               </TouchableOpacity>
-              <Text style={{ fontSize: 22, fontWeight: "800", marginTop: 8 }}>
-                Cart
+              <Text
+                style={{
+                  fontSize: 22,
+                  fontWeight: "800",
+                  marginTop: 8,
+                }}
+              >
+                My Cart
               </Text>
+              <View
+                style={{
+                  position: "absolute",
+                  top: 40,
+                  height: 2,
+                  width: "14%",
+                  backgroundColor: "black",
+                }}
+              ></View>
+              <Image
+                position="absolute"
+                right={10}
+                top={7}
+                h={40}
+                w={40}
+                ml={5}
+                rounded="circle"
+                source={{
+                  uri: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=600",
+                }}
+              />
             </View>
+
             {cardProducts.length >= 1 ? (
-              cardProducts.map((p, inx) => (
-                <View key={`products-${inx}`}>
-                  <Text
-                    style={{
-                      marginTop: 45,
-                      fontWeight: "bold",
-                      fontSize: 19,
-                    }}
-                  >
-                    {p.name}
-                  </Text>
-                </View>
-              ))
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ marginBottom: 40 }}
+              >
+                {cardProducts.map((p, inx) => (
+                  <View key={`products-${inx}`} style={{ marginBottom: 15 }}>
+                    <View
+                      style={{
+                        // marginTop: hp(2),
+                        marginHorizontal: wp(10),
+                        width: wp(80),
+
+                        backgroundColor: "#FFFFFF",
+                        borderRadius: 20,
+
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Image
+                        m={10}
+                        h={100}
+                        w={100}
+                        rounded={20}
+                        source={{
+                          uri: p.imgUrl,
+                        }}
+                      />
+                      <Text
+                        style={{
+                          marginTop: 15,
+                          marginLeft: 7,
+                          fontWeight: "bold",
+                          fontSize: 18,
+                        }}
+                      >
+                        {p.name}
+                      </Text>
+                      <View
+                        style={{ position: "absolute", right: 20, bottom: 10 }}
+                      >
+                        <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                          ${p.price}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                ))}
+              </ScrollView>
             ) : (
               <Text style={{ marginTop: 45, fontWeight: "bold", fontSize: 19 }}>
                 No hay productos en el carrito
               </Text>
             )}
+          </View>
+          <View
+            style={{
+              marginHorizontal: wp(10),
 
-            <Text>TOTAL PRODUCTS: ${sumTotals}</Text>
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexDirection: "row",
+              marginBottom: 15,
+            }}
+          >
+            <View>
+              <Text style={{ fontWeight: "400" }}>TOTAL </Text>
+              <Text style={{ fontWeight: "bold", fontSize: 17 }}>
+                ${sumTotals}
+              </Text>
+            </View>
             <Link
               href={{
                 pathname: "/(product)/(cart)",
                 params: { cart: JSON.stringify(cardProducts) },
               }}
             >
-              <Text>CHECKOUT</Text>
+              <Button
+                bg="#28D885"
+                color="white"
+                rounded={18}
+                suffix={
+                  <Icon
+                    name="credit"
+                    ml="md"
+                    fontSize={20}
+                    color="white"
+                    fontFamily="Entypo"
+                  />
+                }
+              >
+                Pay Now
+              </Button>
+
+              {/* <Text>1</Text> */}
             </Link>
           </View>
         </Modal>

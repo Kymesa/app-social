@@ -168,21 +168,21 @@ export default function Layout() {
           ),
           headerRight: () => (
             <TouchableOpacity>
-              <Badge bg="red500" right={20} top={-4} h={11} w={11}>
-                <Icon
-                  p={3}
-                  shadow={"md"}
-                  borderWidth={1}
-                  bg="white"
-                  borderColor="white"
-                  rounded={"circle"}
-                  name="notifications-outline"
-                  mr={20}
-                  color="black"
-                  fontSize="6xl"
-                  fontFamily="Ionicons"
-                />
-              </Badge>
+              {/* <Badge bg="red500" right={20} top={-4} h={11} w={11}> */}
+              <Icon
+                p={3}
+                shadow={"md"}
+                borderWidth={1}
+                bg="white"
+                borderColor="white"
+                rounded={"circle"}
+                name="notifications-outline"
+                mr={20}
+                color="black"
+                fontSize="6xl"
+                fontFamily="Ionicons"
+              />
+              {/* </Badge> */}
             </TouchableOpacity>
           ),
           headerShadowVisible: false,
