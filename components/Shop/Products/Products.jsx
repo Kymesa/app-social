@@ -429,6 +429,7 @@ const Products = () => {
               </Text>
             </View>
             <Link
+              disabled={cardProducts.length <= 0 ? true : false}
               href={{
                 pathname: "/(product)/(cart)",
                 params: { cart: JSON.stringify(cardProducts) },
@@ -442,7 +443,10 @@ const Products = () => {
                 }}
               > */}
               <Div bg="#28D885" p={15} rounded={18} row alignItems="center">
-                <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                <Text
+                  style={{ fontWeight: "bold", fontSize: 15 }}
+                  disabled={true}
+                >
                   Pay Now
                 </Text>
                 <Icon
