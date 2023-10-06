@@ -6,9 +6,8 @@ import {
 } from "react-native-responsive-screen";
 import InputSearch from "../../components/Shop/InputSearch/InputSearch";
 import Banner from "../../components/Shop/Banner/Banner";
-import Products from "../../components/Shop/Products/Products";
 import { ScrollView } from "react-native-virtualized-view";
-import { ModalCartProvider } from "../../components/Shop/contexts/ModalCartContext";
+import HomeProducts from "../../components/Shop/Products/HomeProducts";
 export default function Peoples() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -19,7 +18,7 @@ export default function Peoples() {
       >
         <InputSearch />
         <Banner />
-        <Products />
+        <HomeProducts />
       </ScrollView>
     </SafeAreaView>
   );

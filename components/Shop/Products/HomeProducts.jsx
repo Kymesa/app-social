@@ -10,7 +10,7 @@ import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
 import { ModalCartContext } from "../contexts/ModalCartContext";
 import { Link } from "expo-router";
 import { ScrollView } from "react-native-virtualized-view";
-import ProductModalDetails from "./ProductSelectDetail.jsx";
+import ProductModalDetails from "./ProductSelectDetail.jsx.jsx";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -19,7 +19,7 @@ const categoriesList = [
   "Apple",
   "Cars",
 ];
-const Products = () => {
+const HomeProducts = () => {
   const [selectCategories, setSelectCategories] = useState(categoriesList[0]);
   const [listDataCategories, setListDataCategories] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -323,4 +323,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default HomeProducts;
