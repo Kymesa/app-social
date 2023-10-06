@@ -1,17 +1,18 @@
 import { Text, SafeAreaView, View, TouchableOpacity } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-import React from "react";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import React, { useEffect, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { ScrollView } from "react-native-virtualized-view";
 import { Icon } from "react-native-magnus";
 
 const cardProduct = () => {
   const { cart, sumTotals } = useLocalSearchParams();
-  console.log(cart);
-  console.log(sumTotals);
+  const [cartCheckout, setCartCheckout] = useState(null);
+  useEffect(() => {
+    const cartParce = JSON.parse(cart);
+    setCartCheckout(cartParce);
+  }, [cart]);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
@@ -54,6 +55,12 @@ const cardProduct = () => {
         >
           PRODUCTS:
         </Text>
+        {cartCheckout?.map((p) => (
+          <View key={p.id}>
+            <Text>{p.name}</Text>
+          </View>
+        ))}
+        <Text>{sumTotals}</Text>
       </ScrollView>
     </SafeAreaView>
   );

@@ -8,8 +8,6 @@ export default function ProductCard({ product, eventProduct }) {
         <TouchableOpacity onPress={() => eventProduct(product)}>
           <Image
             h={100}
-            // zIndex={1}
-
             resizeMode="contain"
             borderWidth={1}
             borderColor="gray300"

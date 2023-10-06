@@ -1,15 +1,10 @@
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import GestureRecognizer from "react-native-swipe-gestures";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import React, { useContext, useEffect, useState } from "react";
 import ProductsData from "./productsData";
 import ProductCard from "./ProductCard";
-import Modal from "react-native-modal";
-import { Div, Icon, Image } from "react-native-magnus";
 import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
 import { ModalCartContext } from "../contexts/ModalCartContext";
-import { Link } from "expo-router";
-import { ScrollView } from "react-native-virtualized-view";
 import ProductModalDetails from "./ProductSelectDetail.jsx.jsx";
 import ProductsCarts from "./ProductsCarts";
 const categoriesList = [
