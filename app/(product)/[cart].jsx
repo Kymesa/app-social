@@ -24,7 +24,7 @@ const cardProduct = () => {
             flexDirection: "row",
           }}
         >
-          <TouchableOpacity onPress={() => router.back()}>
+          <TouchableOpacity onPress={() => router.push("/(tabs)/Shop")}>
             <Icon
               name="arrow-back-ios"
               color="black"

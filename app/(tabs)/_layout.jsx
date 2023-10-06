@@ -3,7 +3,12 @@ import { Badge, Icon, Image } from "react-native-magnus";
 import { BtnHeaderScreen } from "../../components/BtnHeader/BtnHeaderScreen";
 import BtnHeaderMaps from "../../components/BtnHeader/BtnHeaderMaps";
 import { Text, TouchableOpacity, View } from "react-native";
-import { ModalCartProvider } from "../../components/Shop/contexts/ModalCartContext";
+import {
+  ModalCartContext,
+  ModalCartProvider,
+} from "../../components/Shop/contexts/ModalCartContext";
+import { useContext } from "react";
+
 export default function Layout() {
   return (
     <ModalCartProvider>
@@ -155,7 +160,6 @@ export default function Layout() {
             headerLeft: () => (
               <TouchableOpacity onPress={() => alert("PRES")}>
                 <Icon
-                  shadow={"md"}
                   borderWidth={1}
                   bg="white"
                   borderColor="white"
@@ -169,25 +173,38 @@ export default function Layout() {
                 />
               </TouchableOpacity>
             ),
-            headerRight: () => (
-              <TouchableOpacity>
-                {/* <Badge bg="red500" right={20} top={-4} h={11} w={11}> */}
-                <Icon
-                  p={3}
-                  shadow={"md"}
-                  borderWidth={1}
-                  bg="white"
-                  borderColor="white"
-                  rounded={"circle"}
-                  name="notifications-outline"
-                  mr={20}
-                  color="black"
-                  fontSize="6xl"
-                  fontFamily="Ionicons"
-                />
-                {/* </Badge> */}
-              </TouchableOpacity>
-            ),
+
+            headerRight: () => {
+              const [modalCart, setModalCart, countCart] =
+                useContext(ModalCartContext);
+              return (
+                <>
+                  <TouchableOpacity onPress={() => setModalCart(!modalCart)}>
+                    {countCart >= 1 ? (
+                      <Badge bg="red500" right={18} top={35} h={11} w={11}>
+                        <Icon
+                          name="shoppingcart"
+                          color="gray900"
+                          fontFamily="AntDesign"
+                          fontSize="6xl"
+                          mr={20}
+                          p={3}
+                        />
+                      </Badge>
+                    ) : (
+                      <Icon
+                        name="shoppingcart"
+                        color="gray900"
+                        fontFamily="AntDesign"
+                        fontSize="6xl"
+                        mr={20}
+                        p={3}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </>
+              );
+            },
             headerShadowVisible: false,
           }}
         />

@@ -34,7 +34,17 @@ const InputSearch = () => {
         }
       />
       <View style={{ backgroundColor: "#F6F6F8" }}>
-        <TouchableOpacity onPress={() => setModalCart(!modalCart)}>
+        <TouchableOpacity>
+          <Icon
+            p={5}
+            name="sound-mix"
+            color="gray900"
+            fontFamily="Entypo"
+            fontSize={32}
+          />
+        </TouchableOpacity>
+
+        {/* <TouchableOpacity onPress={() => setModalCart(!modalCart)}>
           {countCart >= 1 ? (
             <Badge bg="red500" right={-2} top={35} h={11} w={11}>
               <Icon
@@ -54,7 +64,7 @@ const InputSearch = () => {
               fontSize={32}
             />
           )}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
