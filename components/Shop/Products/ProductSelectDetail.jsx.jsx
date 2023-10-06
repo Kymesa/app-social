@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const ProductFIlter = () => {
+const ProductModalDetails = () => {
   return (
     <View>
-      <Text>ProductFIlter</Text>
+      <Text>ProductModalDetails</Text>
     </View>
   );
 };
 
-export default ProductFIlter;
+export default ProductModalDetails;
