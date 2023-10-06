@@ -1,4 +1,11 @@
-import { View, Text, FlatList, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+  Pressable,
+} from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,7 +14,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ProductsData from "./productsData";
 import ProductCard from "./ProductCard";
 import Modal from "react-native-modal";
-import { Button, Icon, Image } from "react-native-magnus";
+import { Button, Div, Icon, Image } from "react-native-magnus";
 import {
   ALERT_TYPE,
   Dialog,
@@ -381,9 +388,28 @@ const Products = () => {
                 ))}
               </ScrollView>
             ) : (
-              <Text style={{ marginTop: 45, fontWeight: "bold", fontSize: 19 }}>
-                No hay productos en el carrito
-              </Text>
+              <>
+                <View>
+                  <Image
+                    h={250}
+                    w={250}
+                    m={10}
+                    alignSelf="center"
+                    rounded="circle"
+                    source={require("../../../assets/Nproduct.png")}
+                  />
+                </View>
+                <Text
+                  style={{
+                    marginTop: 45,
+                    fontWeight: "bold",
+                    fontSize: 22,
+                    textAlign: "center",
+                  }}
+                >
+                  No hay productos en el carrito
+                </Text>
+              </>
             )}
           </View>
           <View
@@ -408,8 +434,28 @@ const Products = () => {
                 params: { cart: JSON.stringify(cardProducts) },
               }}
             >
-              <Button
-                bg="#28D885"
+              {/* <Pressable
+                style={{
+                  backgroundColor: "#28D885",
+                  padding: 15,
+                  borderRadius: 18,
+                }}
+              > */}
+              <Div bg="#28D885" p={15} rounded={18} row alignItems="center">
+                <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                  Pay Now
+                </Text>
+                <Icon
+                  name="credit"
+                  color="black"
+                  fontSize={18}
+                  fontFamily="Entypo"
+                />
+              </Div>
+              {/* </Pressable> */}
+
+              {/* <Button
+                bg=""
                 color="white"
                 rounded={18}
                 suffix={
@@ -423,7 +469,7 @@ const Products = () => {
                 }
               >
                 Pay Now
-              </Button>
+              </Button> */}
 
               {/* <Text>1</Text> */}
             </Link>
