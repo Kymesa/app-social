@@ -79,9 +79,10 @@ const Products = () => {
       setModalVisible(!isModalVisible);
     }, 1000);
   };
-  // const handleClearCard = () => {
-  //   setCardProducts([]);
-  // };
+  const handleClearCard = () => {
+    setCardProducts([]);
+    setCountCart(0);
+  };
 
   return (
     <>
@@ -332,27 +333,18 @@ const Products = () => {
                     backgroundColor: "black",
                   }}
                 ></View>
-                <Icon
-                  name="cart-remove"
-                  color="black"
-                  fontSize={20}
-                  fontFamily="MaterialCommunityIcons"
-                  bg="gray300"
-                  p={7}
-                  rounded={"circle"}
-                />
-                {/* <Image
-                  position="absolute"
-                  right={10}
-                  top={7}
-                  h={40}
-                  w={40}
-                  ml={5}
-                  rounded="circle"
-                  source={{
-                    uri: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=600",
-                  }}
-                /> */}
+                <TouchableOpacity
+                  onPress={() => handleClearCard()}
+                  style={{ position: "absolute", right: 10, top: 5 }}
+                >
+                  <Icon
+                    name="cart-remove"
+                    color="black"
+                    fontSize={28}
+                    fontFamily="MaterialCommunityIcons"
+                    p={7}
+                  />
+                </TouchableOpacity>
               </View>
               {cardProducts.length >= 1 ? (
                 <ScrollView
