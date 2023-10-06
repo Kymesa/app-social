@@ -181,7 +181,7 @@ export default function Layout() {
                 <>
                   <TouchableOpacity onPress={() => setModalCart(!modalCart)}>
                     {countCart >= 1 ? (
-                      <Badge bg="red500" right={18} top={35} h={11} w={11}>
+                      <Badge bg="red500" right={18} top={30} h={11} w={11}>
                         <Icon
                           name="shoppingcart"
                           color="gray900"
