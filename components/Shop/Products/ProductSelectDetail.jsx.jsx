@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import Modal from "react-native-modal";
-import { Button, Icon, Image } from "react-native-magnus";
+import { Button, Div, Icon, Image } from "react-native-magnus";
 import { AlertNotificationRoot } from "react-native-alert-notification";
 import {
   widthPercentageToDP as wp,
@@ -76,16 +76,42 @@ const ProductModalDetails = ({
                     uri: productSelectModal.imgUrl,
                   }}
                 />
-                <Text
+                <View
                   style={{
-                    marginLeft: 15,
-                    fontWeight: "800",
-                    fontSize: 21,
-                    marginTop: 22,
+                    marginTop: 30,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   }}
                 >
-                  {productSelectModal.name}
-                </Text>
+                  <Text
+                    style={{
+                      marginLeft: 15,
+                      fontWeight: "800",
+                      fontSize: 21,
+                    }}
+                  >
+                    {productSelectModal.name}
+                  </Text>
+                  <Div
+                    bg="#FEC6C8"
+                    pr={10}
+                    p={5}
+                    borderStartWidth={5}
+                    borderColor="#28D885"
+                  >
+                    <Text
+                      style={{
+                        fontWeight: "800",
+                        color: "#E18280",
+                        fontSize: 14,
+                      }}
+                    >
+                      20% OFF
+                    </Text>
+                  </Div>
+                </View>
+
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Text
                     style={{
