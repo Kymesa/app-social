@@ -67,10 +67,10 @@ const ProductModalDetails = ({
                 <Image
                   mt={40}
                   alignSelf="center"
-                  h={"20%"}
-                  w={"60%"}
-                  m={10}
-                  rounded={20}
+                  h={"30%"}
+                  w={"80%"}
+                  // m={10}
+                  rounded={10}
                   resizeMode="contain"
                   source={{
                     uri: productSelectModal.imgUrl,
