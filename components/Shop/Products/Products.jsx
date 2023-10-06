@@ -1,14 +1,5 @@
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  Alert,
-  Pressable,
-} from "react-native";
-import GestureRecognizer, {
-  swipeDirections,
-} from "react-native-swipe-gestures";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import GestureRecognizer from "react-native-swipe-gestures";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
