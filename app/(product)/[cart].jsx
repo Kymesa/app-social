@@ -9,8 +9,9 @@ import { ScrollView } from "react-native-virtualized-view";
 import { Icon } from "react-native-magnus";
 
 const cardProduct = () => {
-  const { cart } = useLocalSearchParams();
+  const { cart, sumTotals } = useLocalSearchParams();
   console.log(cart);
+  console.log(sumTotals);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView>
@@ -23,7 +24,7 @@ const cardProduct = () => {
             flexDirection: "row",
           }}
         >
-          <TouchableOpacity onPress={() => router.push("/(tabs)/Shop")}>
+          <TouchableOpacity onPress={() => router.back()}>
             <Icon
               name="arrow-back-ios"
               color="black"

@@ -11,18 +11,16 @@ import { ScrollView } from "react-native-virtualized-view";
 import { ModalCartProvider } from "../../components/Shop/contexts/ModalCartContext";
 export default function Peoples() {
   return (
-    <ModalCartProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-        <ScrollView
-          style={{ marginHorizontal: wp(4) }}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-        >
-          <InputSearch />
-          <Banner />
-          <Products />
-        </ScrollView>
-      </SafeAreaView>
-    </ModalCartProvider>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <ScrollView
+        style={{ marginHorizontal: wp(4) }}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        <InputSearch />
+        <Banner />
+        <Products />
+      </ScrollView>
+    </SafeAreaView>
   );
 }

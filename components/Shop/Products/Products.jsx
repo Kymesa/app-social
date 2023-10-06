@@ -334,6 +334,7 @@ const Products = () => {
                   }}
                 ></View>
                 <TouchableOpacity
+                  disabled={cardProducts.length >= 1 ? false : true}
                   onPress={() => handleClearCard()}
                   style={{ position: "absolute", right: 10, top: 5 }}
                 >
@@ -444,7 +445,10 @@ const Products = () => {
                 disabled={cardProducts.length <= 0 ? true : false}
                 href={{
                   pathname: "/(product)/(cart)",
-                  params: { cart: JSON.stringify(cardProducts) },
+                  params: {
+                    cart: JSON.stringify(cardProducts),
+                    sumTotals: sumTotals,
+                  },
                 }}
               >
                 {/* <Pressable
