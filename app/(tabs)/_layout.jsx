@@ -173,7 +173,7 @@ export default function Layout() {
             ),
 
             headerRight: () => {
-              const [modalCart, setModalCart, countCart] =
+              const { modalCart, setModalCart, countCart } =
                 useContext(AppSocialContext);
               return (
                 <>

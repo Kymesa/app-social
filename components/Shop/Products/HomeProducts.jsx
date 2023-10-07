@@ -21,7 +21,7 @@ const HomeProducts = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [productSelectModal, setProductSeleteModal] = useState(null);
   const [cardProducts, setCardProducts] = useState([]);
-  const [modalCart, setModalCart, countCart, setCountCart] =
+  const { modalCart, setModalCart, countCart, setCountCart } =
     useContext(AppSocialContext);
   const [sumTotals, setSumTotals] = useState(0);
 

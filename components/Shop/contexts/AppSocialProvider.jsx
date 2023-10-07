@@ -6,7 +6,7 @@ export const AppSocialProvider = ({ children }) => {
   const [countCart, setCountCart] = useState(0);
   return (
     <AppSocialContext.Provider
-      value={[modalCart, setModalCart, countCart, setCountCart]}
+      value={{ modalCart, setModalCart, countCart, setCountCart }}
     >
       {children}
     </AppSocialContext.Provider>
