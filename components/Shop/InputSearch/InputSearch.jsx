@@ -1,13 +1,9 @@
 import { TouchableOpacity, View } from "react-native";
-import React, { useContext } from "react";
-import { Input, Icon, Badge } from "react-native-magnus";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import React from "react";
+import { Input, Icon } from "react-native-magnus";
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { ModalCartContext } from "../contexts/ModalCartContext";
 const InputSearch = () => {
-  const [modalCart, setModalCart, countCart] = useContext(ModalCartContext);
   return (
     <View
       style={{
