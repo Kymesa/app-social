@@ -106,6 +106,7 @@ const ProductsCarts = ({
                         }}
                       >
                         <Image
+                          resizeMode="contain"
                           m={10}
                           h={100}
                           w={100}

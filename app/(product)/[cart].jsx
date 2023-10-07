@@ -3,8 +3,8 @@ import {
   SafeAreaView,
   View,
   TouchableOpacity,
-  Button,
   ActivityIndicator,
+  Image,
 } from "react-native";
 
 import {
@@ -31,7 +31,7 @@ const cardProduct = () => {
     setTimeout(() => {
       setModalVisible(!isModalVisible);
       setIsPay(true);
-    }, 8000);
+    }, 7000);
   }, []);
 
   return (
@@ -117,7 +117,7 @@ const cardProduct = () => {
               position: "absolute",
               margin: 2,
               bottom: 0,
-              height: hp(50),
+              height: hp(30),
               width: wp(100),
             }}
           >
@@ -140,6 +140,10 @@ const cardProduct = () => {
                 }}
               >
                 <ActivityIndicator size={"large"} />
+                <Image
+                  style={{ width: 100, height: 100 }}
+                  source={require("../../assets/animation_lnfbykbi_small.gif")}
+                />
               </View>
             </View>
           </Modal>
