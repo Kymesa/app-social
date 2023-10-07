@@ -4,9 +4,9 @@ import React, { useContext, useEffect, useState } from "react";
 import ProductsData from "./productsData";
 import ProductCard from "./ProductCard";
 import { ALERT_TYPE, Dialog } from "react-native-alert-notification";
-import { ModalCartContext } from "../contexts/ModalCartContext";
 import ProductModalDetails from "./ProductSelectDetail.jsx.jsx";
 import ProductsCarts from "./ProductsCarts";
+import { AppSocialContext } from "../contexts/AppSocialContext";
 const categoriesList = [
   "Smartphones",
   "Laptops",
@@ -22,7 +22,7 @@ const HomeProducts = () => {
   const [productSelectModal, setProductSeleteModal] = useState(null);
   const [cardProducts, setCardProducts] = useState([]);
   const [modalCart, setModalCart, countCart, setCountCart] =
-    useContext(ModalCartContext);
+    useContext(AppSocialContext);
   const [sumTotals, setSumTotals] = useState(0);
 
   useEffect(() => {

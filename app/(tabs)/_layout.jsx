@@ -3,15 +3,13 @@ import { Badge, Icon, Image } from "react-native-magnus";
 import { BtnHeaderScreen } from "../../components/BtnHeader/BtnHeaderScreen";
 import BtnHeaderMaps from "../../components/BtnHeader/BtnHeaderMaps";
 import { Text, TouchableOpacity, View } from "react-native";
-import {
-  ModalCartContext,
-  ModalCartProvider,
-} from "../../components/Shop/contexts/ModalCartContext";
+import { AppSocialProvider } from "../../components/Shop/contexts/AppSocialProvider";
 import { useContext } from "react";
+import { AppSocialContext } from "../../components/Shop/contexts/AppSocialContext";
 
 export default function Layout() {
   return (
-    <ModalCartProvider>
+    <AppSocialProvider>
       <Tabs
         screenOptions={{
           tabBarStyle: {
@@ -176,7 +174,7 @@ export default function Layout() {
 
             headerRight: () => {
               const [modalCart, setModalCart, countCart] =
-                useContext(ModalCartContext);
+                useContext(AppSocialContext);
               return (
                 <>
                   <TouchableOpacity onPress={() => setModalCart(!modalCart)}>
@@ -226,6 +224,6 @@ export default function Layout() {
           }}
         />
       </Tabs>
-    </ModalCartProvider>
+    </AppSocialProvider>
   );
 }

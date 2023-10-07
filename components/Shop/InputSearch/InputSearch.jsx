@@ -2,7 +2,6 @@ import { TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Input, Icon } from "react-native-magnus";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { ModalCartContext } from "../contexts/ModalCartContext";
 const InputSearch = () => {
   return (
     <View
