@@ -38,28 +38,6 @@ const InputSearch = () => {
             fontSize={32}
           />
         </TouchableOpacity>
-
-        {/* <TouchableOpacity onPress={() => setModalCart(!modalCart)}>
-          {countCart >= 1 ? (
-            <Badge bg="red500" right={-2} top={35} h={11} w={11}>
-              <Icon
-                p={5}
-                name="shoppingcart"
-                color="gray900"
-                fontFamily="AntDesign"
-                fontSize={32}
-              />
-            </Badge>
-          ) : (
-            <Icon
-              p={5}
-              name="shoppingcart"
-              color="gray900"
-              fontFamily="AntDesign"
-              fontSize={32}
-            />
-          )}
-        </TouchableOpacity> */}
       </View>
     </View>
   );
