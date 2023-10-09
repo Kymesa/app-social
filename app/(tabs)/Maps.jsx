@@ -1,7 +1,7 @@
 // ? RN UTILIZADOS
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
-import { View, Text, TouchableOpacity, Pressable } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 // ? LIBRERIA PARA OBTENER LA ALTURA Y ANCHO DE LA PANTALLA
 import {
   widthPercentageToDP as wp,
@@ -32,6 +32,29 @@ const Maps = () => {
   const [stores, setStore] = useState(false);
   const [enginners, setEnginners] = useState(false);
   const [arrMarker, setArrMarker] = useState(null);
+  // const [refreshing, setRefreshing] = useState(false);
+
+  // const onRefresh = useCallback(() => {
+  //   setRefreshing(true)(async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       console.log("HOLIS");
+  //       return;
+  //     }
+  //     let locationGet = await Location.getCurrentPositionAsync({});
+  //     setInitialRegion({
+  //       latitude: locationGet.coords.latitude,
+  //       longitude: locationGet.coords.longitude,
+  //       latitudeDelta: 0.03,
+  //       longitudeDelta: 0.03,
+  //     });
+  //     setMarkers({
+  //       latitude: locationGet.coords.latitude,
+  //       longitude: locationGet.coords.longitude,
+  //     });
+  //     setRefreshing(false);
+  //   })();
+  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -40,6 +63,16 @@ const Maps = () => {
         console.log("HOLIS");
         return;
       }
+      // setInitialRegion({
+      //   latitude: 37.33548,
+      //   longitude: -121.893028,
+      //   latitudeDelta: 0.03,
+      //   longitudeDelta: 0.03,
+      // });
+      // setMarkers({
+      //   latitude: 37.33548,
+      //   longitude: -121.893028,
+      // });
       let locationGet = await Location.getCurrentPositionAsync({});
       setInitialRegion({
         latitude: locationGet.coords.latitude,
@@ -172,6 +205,9 @@ const Maps = () => {
             horizontal
             data={checkList}
             key={(checkList) => checkList}
+            // refreshControl={
+            //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            // }
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => handleCheck(item.name)}
