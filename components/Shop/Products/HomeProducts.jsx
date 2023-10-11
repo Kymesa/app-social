@@ -42,7 +42,7 @@ const HomeProducts = () => {
   };
 
   useEffect(() => {
-    const sumTotal = cardProducts.reduce((a, b) => a + b.price, 0);
+    const sumTotal = cardProducts?.reduce((a, b) => a + b.price, 0);
     setSumTotals(sumTotal);
   }, [cardProducts]);
 
