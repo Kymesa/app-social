@@ -12,7 +12,7 @@ import MapView, { Circle, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 // ? EXPO LOCATION PERMISOS
 import * as Location from "expo-location";
 // ? FRAMEWORK CSS MAGNUS
-import { Icon, Input } from "react-native-magnus";
+import { Icon, Image, Input } from "react-native-magnus";
 // ? DB - DOC - STORE - ENG
 import { DoctorsDB } from "../../components/Maps/DB/DoctorsDB";
 import { StoreDB } from "../../components/Maps/DB/StoreDB";
@@ -23,15 +23,16 @@ import { checkList } from "../../components/Maps/DB/CheckList";
 import { styleMap } from "../../components/Maps/StyleMap";
 import ListCard from "../../components/Maps/ListCard";
 import MarkerList from "../../components/Maps/MarkerList";
+import { SafeAreaView } from "react-native-safe-area-context";
 const Maps = () => {
-  const mapView = useRef(null);
-  const [initialRegion, setInitialRegion] = useState(null);
-  const [markers, setMarkers] = useState(null);
-  const [inputText, setInputText] = useState("");
-  const [doctors, setDoctors] = useState(false);
-  const [stores, setStore] = useState(false);
-  const [enginners, setEnginners] = useState(false);
-  const [arrMarker, setArrMarker] = useState(null);
+  // const mapView = useRef(null);
+  // const [initialRegion, setInitialRegion] = useState(null);
+  // const [markers, setMarkers] = useState(null);
+  // const [inputText, setInputText] = useState("");
+  // const [doctors, setDoctors] = useState(false);
+  // const [stores, setStore] = useState(false);
+  // const [enginners, setEnginners] = useState(false);
+  // const [arrMarker, setArrMarker] = useState(null);
   // const [refreshing, setRefreshing] = useState(false);
 
   // const onRefresh = useCallback(() => {
@@ -56,84 +57,97 @@ const Maps = () => {
   //   })();
   // }, []);
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("HOLIS");
-        return;
-      }
-      // setInitialRegion({
-      //   latitude: 37.33548,
-      //   longitude: -121.893028,
-      //   latitudeDelta: 0.03,
-      //   longitudeDelta: 0.03,
-      // });
-      // setMarkers({
-      //   latitude: 37.33548,
-      //   longitude: -121.893028,
-      // });
-      let locationGet = await Location.getCurrentPositionAsync({});
-      setInitialRegion({
-        latitude: locationGet.coords.latitude,
-        longitude: locationGet.coords.longitude,
-        latitudeDelta: 0.03,
-        longitudeDelta: 0.03,
-      });
-      setMarkers({
-        latitude: locationGet.coords.latitude,
-        longitude: locationGet.coords.longitude,
-      });
-    })();
-  }, [arrMarker]);
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       console.log("HOLIS");
+  //       return;
+  //     }
+  // setInitialRegion({
+  //   latitude: 37.33548,
+  //   longitude: -121.893028,
+  //   latitudeDelta: 0.03,
+  //   longitudeDelta: 0.03,
+  // });
+  // setMarkers({
+  //   latitude: 37.33548,
+  //   longitude: -121.893028,
+  // });
+  //     let locationGet = await Location.getCurrentPositionAsync({});
+  //     setInitialRegion({
+  //       latitude: locationGet.coords.latitude,
+  //       longitude: locationGet.coords.longitude,
+  //       latitudeDelta: 0.03,
+  //       longitudeDelta: 0.03,
+  //     });
+  //     setMarkers({
+  //       latitude: locationGet.coords.latitude,
+  //       longitude: locationGet.coords.longitude,
+  //     });
+  //   })();
+  // }, [arrMarker]);
 
-  const handleCheck = (item) => {
-    if (doctors | stores | enginners) {
-      setDoctors(false);
-      setStore(false);
-      setEnginners(false);
-      setArrMarker(null);
-    }
-    switch (item) {
-      case "Doctors":
-        setDoctors(!doctors);
-        break;
-      case "Store":
-        setStore(!stores);
-        break;
-      case "Engginers":
-        setEnginners(!enginners);
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleCheck = (item) => {
+  //   if (doctors | stores | enginners) {
+  //     setDoctors(false);
+  //     setStore(false);
+  //     setEnginners(false);
+  //     setArrMarker(null);
+  //   }
+  //   switch (item) {
+  //     case "Doctors":
+  //       setDoctors(!doctors);
+  //       break;
+  //     case "Store":
+  //       setStore(!stores);
+  //       break;
+  //     case "Engginers":
+  //       setEnginners(!enginners);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
-  const searchPlaces = () => {
-    if (inputText == "Valledupar" || inputText == "valledupar") {
-      mapView.current.animateToRegion(
-        {
-          // Takes a region object as parameter
-          latitude: 10.476713507755939,
-          longitude: -73.24236273765565,
-          latitudeDelta: 0.03,
-          longitudeDelta: 0.03,
-        },
-        1000
-      );
-    }
-  };
+  // const searchPlaces = () => {
+  //   if (inputText == "Valledupar" || inputText == "valledupar") {
+  //     mapView.current.animateToRegion(
+  //       {
+  //         // Takes a region object as parameter
+  //         latitude: 10.476713507755939,
+  //         longitude: -73.24236273765565,
+  //         latitudeDelta: 0.03,
+  //         longitudeDelta: 0.03,
+  //       },
+  //       1000
+  //     );
+  //   }
+  // };
 
-  const handleEvent = (e, dataDB) => {
-    const markeId = e._targetInst.return.key;
-    const dataMarker = dataDB.find((m) => {
-      return m.id == markeId;
-    });
-    setArrMarker(dataMarker);
-  };
+  // const handleEvent = (e, dataDB) => {
+  //   const markeId = e._targetInst.return.key;
+  //   const dataMarker = dataDB.find((m) => {
+  //     return m.id == markeId;
+  //   });
+  //   setArrMarker(dataMarker);
+  // };
   return (
     <>
-      <View style={{ flex: 1 }}>
+      <SafeAreaView>
+        <View>
+          <Image
+            h={150}
+            w={150}
+            m={10}
+            top={hp(10)}
+            position="absolute"
+            alignSelf="center"
+            source={require("../../assets/geo3.png")}
+          />
+        </View>
+      </SafeAreaView>
+      {/* <View style={{ flex: 1 }}>
         {initialRegion && (
           <>
             <MapView
@@ -240,7 +254,7 @@ const Maps = () => {
         {stores && arrMarker && <ListCard dataDB={arrMarker} />}
         {doctors && arrMarker && <ListCard dataDB={arrMarker} />}
         {enginners && arrMarker && <ListCard dataDB={arrMarker} />}
-      </View>
+      </View> */}
     </>
   );
 };
