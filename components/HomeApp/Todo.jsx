@@ -30,8 +30,6 @@ const Todo = () => {
           }}
         >
           <Icon
-            // bg="yellow400"
-            // p={20}
             mr={5}
             rounded="circle"
             name="video-camera"
@@ -59,8 +57,6 @@ const Todo = () => {
           }}
         >
           <Icon
-            // bg="yellow400"
-            // p={20}
             mr={5}
             rounded="circle"
             name="photo"
@@ -88,8 +84,6 @@ const Todo = () => {
           }}
         >
           <Icon
-            // bg="yellow400"
-            // p={20}
             mr={5}
             rounded="circle"
             name="video-camera"

@@ -12,7 +12,6 @@ const CardBanner = ({ item, index }) => {
         resizeMode="contain"
         h={hp(20)}
         w={wp(90)}
-        // m={10}
         rounded={22}
         source={{
           uri: item.imgBanner,
@@ -25,18 +24,8 @@ const CardBanner = ({ item, index }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    // borderRadius: 8,
     width: wp(100),
     marginTop: 15,
-    // paddingBottom: 40,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.29,
-    // shadowRadius: 80,
-    // elevation: 7,
   },
 });
 

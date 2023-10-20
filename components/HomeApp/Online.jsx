@@ -1,4 +1,4 @@
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList } from "react-native";
 import React from "react";
 import { Badge, Image } from "react-native-magnus";
 

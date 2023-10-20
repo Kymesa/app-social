@@ -23,8 +23,6 @@ const ProductModalDetails = ({
         {productSelectModal && (
           <View style={{ flex: 1 }}>
             <Modal
-              // statusBarTranslucent={true}
-
               animationIn={"fadeInUp"}
               isVisible={isModalVisible}
               style={{
@@ -69,7 +67,6 @@ const ProductModalDetails = ({
                   alignSelf="center"
                   h={"30%"}
                   w={"80%"}
-                  // m={10}
                   rounded={10}
                   resizeMode="contain"
                   source={{
@@ -163,7 +160,7 @@ const ProductModalDetails = ({
                 <View
                   style={{
                     position: "absolute",
-                    bottom: hp(8),
+                    bottom: 35,
                     alignSelf: "center",
                   }}
                 >

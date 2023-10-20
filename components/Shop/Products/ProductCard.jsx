@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     shadowColor: "#000",
     padding: 9,
-    // width: wp(20),
   },
   fondo: {
     backgroundColor: "white",

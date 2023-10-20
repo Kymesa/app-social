@@ -145,7 +145,6 @@ const cardProduct = () => {
                     marginTop: 20,
                     borderWidth: 1,
                     width: wp(92),
-                    // marginHorizontal: wp(6),
                     borderColor: "#e0dada",
                   }}
                 ></View>

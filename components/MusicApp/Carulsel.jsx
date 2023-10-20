@@ -37,7 +37,6 @@ const Carulsel = () => {
   ];
 
   const witdh = Dimensions.get("window").width;
-  // const height = Dimensions.get("window").height;
   const ANCHO_CONTENEDOR = witdh * 0.7;
   const ESPACIO = 10;
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -58,10 +57,7 @@ const Carulsel = () => {
         decelerationRate={0}
         snapToInterval={ANCHO_CONTENEDOR}
         data={images}
-        // key={({ item }) => item.id}
         keyExtractor={(item) => item.id}
-        // estimatedItemSize={200}
-        // scrollEventThrottle={16}
         renderItem={({ item, index }) => {
           const inputRange = [
             (index - 1) * ANCHO_CONTENEDOR + 100,
@@ -90,7 +86,6 @@ const Carulsel = () => {
                   alignItems: "center",
                   paddingHorizontal: 10,
                   transform: [{ translateY: scrollY }],
-                  // backgroundColor: "red",
                 }}
               >
                 <ImageBackground
@@ -137,7 +132,6 @@ const styles = StyleSheet.create({
     height: 280,
     margin: 0,
     marginBottom: 10,
-    // borderRadius: 24,
     resizeMode: "cover",
   },
 });

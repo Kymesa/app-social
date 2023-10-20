@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import Carousel from "react-native-snap-carousel";
 import CardBanner from "./CardBanner";
@@ -18,7 +18,6 @@ const Banner = () => {
         renderItem={CardBanner}
         sliderWidth={wp(100)}
         itemWidth={wp(100)}
-        // inactiveSlideShift={0}
         useScrollView={true}
       />
     </View>

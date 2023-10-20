@@ -95,7 +95,6 @@ const ProductsCarts = ({
                     <View key={`products-${inx}`} style={{ marginBottom: 15 }}>
                       <View
                         style={{
-                          // marginTop: hp(2),
                           marginHorizontal: wp(10),
                           width: wp(80),
 

@@ -12,7 +12,6 @@ const ListCard = ({ dataDB }) => {
       style={{
         position: "absolute",
         top: hp(82),
-        // left: wp(12),
         marginHorizontal: wp(12),
       }}
     >

@@ -1,12 +1,38 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  Image as Img,
+} from "react-native";
 import { Icon, Image } from "react-native-magnus";
+import React, { useCallback, useState } from "react";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
+import { TapGestureHandler } from "react-native-gesture-handler";
 
-const CardPost = ({ name, descripcion, date, urlPost, urlPerfil }) => {
+const CardPost = ({ name, descripcion, date, urlPost, urlPerfil, like }) => {
+  const ImageComponen = Animated.createAnimatedComponent(Img);
   const [love, setLove] = useState(false);
+  const scale = useSharedValue(0);
+  const onDoubleTap = useCallback(() => {
+    setLove(true);
+    scale.value = withSpring(1, undefined, (finish) => {
+      if (finish) {
+        scale.value = withSpring(0);
+      }
+    });
+  }, []);
+  const animatedStyleHeart = useAnimatedStyle(() => {
+    return { transform: [{ scale: Math.max(scale.value, 0) }] };
+  });
   const handleClickLike = () => {
     setLove(!love);
   };
+
   return (
     <View style={{ marginBottom: 15 }}>
       <View
@@ -81,16 +107,37 @@ const CardPost = ({ name, descripcion, date, urlPost, urlPerfil }) => {
         }}
       >
         {descripcion}
-        {/* <Text style={{ color: "blue" }}> https://www.ejemplo.com</Text> */}
       </Text>
       <View>
-        <Image
-          resizeMode="cover"
-          style={{ width: "100%", height: 300 }}
-          source={{
-            uri: urlPost,
-          }}
-        />
+        <TapGestureHandler
+          maxDelayMs={250}
+          numberOfTaps={2}
+          onActivated={onDoubleTap}
+        >
+          <Animated.View style={{ flex: 1 }}>
+            <ImageBackground
+              resizeMode="cover"
+              style={{
+                width: "100%",
+                height: 300,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              source={{
+                uri: urlPost,
+              }}
+            >
+              <ImageComponen
+                style={[
+                  { shadowOpacity: 0.35, borderRadius: 35 },
+                  animatedStyleHeart,
+                ]}
+                tintColor={"white"}
+                source={require("../../assets/heartins.png")}
+              />
+            </ImageBackground>
+          </Animated.View>
+        </TapGestureHandler>
       </View>
       <View
         style={{
@@ -108,7 +155,7 @@ const CardPost = ({ name, descripcion, date, urlPost, urlPerfil }) => {
             flexDirection: "row",
           }}
         >
-          <TouchableOpacity onPress={handleClickLike}>
+          <TouchableOpacity onPress={() => handleClickLike()}>
             <Icon
               mr={5}
               name="heart"
@@ -118,7 +165,7 @@ const CardPost = ({ name, descripcion, date, urlPost, urlPerfil }) => {
             />
           </TouchableOpacity>
 
-          <Text style={{ color: "gray" }}>2056</Text>
+          <Text style={{ color: "gray" }}>{like}</Text>
         </View>
         <View
           style={{
