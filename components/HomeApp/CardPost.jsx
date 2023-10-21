@@ -12,15 +12,13 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-import { TapGestureHandler } from "react-native-gesture-handler";
-
+import { GestureDetector, Gesture } from "react-native-gesture-handler";
 const CardPost = ({ name, descripcion, date, urlPost, urlPerfil, like }) => {
   const ImageComponen = Animated.createAnimatedComponent(Img);
   const [love, setLove] = useState(false);
   const scale = useSharedValue(0);
   const onDoubleTap = useCallback(() => {
-    setLove(true);
-    scale.value = withSpring(1, undefined, (finish) => {
+    scale.value = withSpring(1, { duration: 500 }, (finish) => {
       if (finish) {
         scale.value = withSpring(0);
       }
@@ -29,10 +27,20 @@ const CardPost = ({ name, descripcion, date, urlPost, urlPerfil, like }) => {
   const animatedStyleHeart = useAnimatedStyle(() => {
     return { transform: [{ scale: Math.max(scale.value, 0) }] };
   });
+
   const handleClickLike = () => {
     setLove(!love);
   };
 
+  const doubleTap = Gesture.Tap()
+    .maxDuration(250)
+    .numberOfTaps(2)
+    .onStart(onDoubleTap)
+    .onEnd(
+      useCallback(() => {
+        setLove(true);
+      })
+    );
   return (
     <View style={{ marginBottom: 15 }}>
       <View
@@ -109,11 +117,7 @@ const CardPost = ({ name, descripcion, date, urlPost, urlPerfil, like }) => {
         {descripcion}
       </Text>
       <View>
-        <TapGestureHandler
-          maxDelayMs={250}
-          numberOfTaps={2}
-          onActivated={onDoubleTap}
-        >
+        <GestureDetector gesture={doubleTap}>
           <Animated.View style={{ flex: 1 }}>
             <ImageBackground
               resizeMode="cover"
@@ -137,7 +141,7 @@ const CardPost = ({ name, descripcion, date, urlPost, urlPerfil, like }) => {
               />
             </ImageBackground>
           </Animated.View>
-        </TapGestureHandler>
+        </GestureDetector>
       </View>
       <View
         style={{
