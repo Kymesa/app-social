@@ -1,8 +1,9 @@
 import React from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { Image } from "react-native-magnus";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 const Maps = () => {
   return (
     <>
