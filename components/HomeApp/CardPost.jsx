@@ -12,7 +12,6 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-import LottieView from "lottie-react-native";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
 const CardPost = ({
   name,
@@ -21,7 +20,7 @@ const CardPost = ({
   urlPost,
   urlPerfil,
   like,
-  datas,
+  id,
 }) => {
   const ImageComponen = Animated.createAnimatedComponent(Img);
   const [love, setLove] = useState(false);
@@ -36,11 +35,9 @@ const CardPost = ({
   const animatedStyleHeart = useAnimatedStyle(() => {
     return { transform: [{ scale: Math.max(scale.value, 0) }] };
   });
-
   const handleClickLike = () => {
     setLove(!love);
   };
-
   const doubleTap = Gesture.Tap()
     .maxDuration(250)
     .numberOfTaps(2)
@@ -52,7 +49,12 @@ const CardPost = ({
     );
   return (
     <>
-      <View style={{ marginBottom: 15, scaleY: -1 }}>
+      <View
+        key={id}
+        style={{
+          marginBottom: 15,
+        }}
+      >
         <View
           style={{
             marginLeft: 15,

@@ -1,10 +1,6 @@
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { FlatList, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import CardPost from "./CardPost";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 import { Image } from "react-native-magnus";
 const ListPost = ({ datas }) => {
   const [data, setData] = useState([]);
@@ -16,19 +12,20 @@ const ListPost = ({ datas }) => {
     if (data.length == 0) {
       setData(dataArr);
     } else {
-      setTimeout(() => {
-        setData(dataArr);
-        console.log(dataArr.length);
-      }, 1000);
+      setData(dataArr);
+      console.log("LLAMANDO... DATOS NUEVOS");
+      console.log(dataArr.length);
     }
   }, [indexPage]);
   return (
     <>
       {data && data.length > 0 && (
-        <View style={{ height: "100%" }}>
+        <View>
           <FlatList
             data={data}
-            key={({ item }) => item}
+            maxToRenderPerBatch={3}
+            initialNumToRender={3}
+            keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <CardPost
                 key={item.id}
@@ -39,6 +36,7 @@ const ListPost = ({ datas }) => {
                 urlPerfil={item.urlPerfil}
                 like={item.like}
                 datas={data}
+                id={item.id}
               />
             )}
             onEndReached={() => setindexPage((prevent) => prevent + 3)}
@@ -56,7 +54,7 @@ const indicatorRn = (d) => {
       {d.length == 33 ? null : (
         <Image
           alignSelf="center"
-          h={20}
+          h={30}
           w={59}
           mb={20}
           source={require("../../assets/anu1.gif")}
