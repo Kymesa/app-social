@@ -20,30 +20,27 @@ const ListPost = ({ datas }) => {
   return (
     <>
       {data && data.length > 0 && (
-        <View>
-          <FlatList
-            data={data}
-            maxToRenderPerBatch={3}
-            initialNumToRender={3}
-            style={{ flex: 1, height: "100%" }}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <CardPost
-                key={item.id}
-                name={item.name}
-                descripcion={item.descripcion}
-                date={item.date}
-                urlPost={item.urlPost}
-                urlPerfil={item.urlPerfil}
-                like={item.like}
-                datas={data}
-                id={item.id}
-              />
-            )}
-            onEndReached={() => setindexPage((prevent) => prevent + 3)}
-            ListFooterComponent={() => indicatorRn(data)}
-          />
-        </View>
+        <FlatList
+          data={data}
+          initialNumToRender={5}
+          style={{ flex: 1 }}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <CardPost
+              key={item.id}
+              name={item.name}
+              descripcion={item.descripcion}
+              date={item.date}
+              urlPost={item.urlPost}
+              urlPerfil={item.urlPerfil}
+              like={item.like}
+              datas={data}
+              id={item.id}
+            />
+          )}
+          onEndReached={() => setindexPage((prevent) => prevent + 3)}
+          ListFooterComponent={() => indicatorRn(data)}
+        />
       )}
     </>
   );

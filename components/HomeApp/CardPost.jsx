@@ -6,7 +6,7 @@ import {
   Image as Img,
 } from "react-native";
 import { Icon, Image } from "react-native-magnus";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, memo } from "react";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -220,4 +220,4 @@ const CardPost = ({
     </>
   );
 };
-export default CardPost;
+export default memo(CardPost);
