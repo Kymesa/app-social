@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import CardPost from "./CardPost";
 import { Image } from "react-native-magnus";
@@ -25,6 +25,7 @@ const ListPost = ({ datas }) => {
             data={data}
             maxToRenderPerBatch={3}
             initialNumToRender={3}
+            style={{ flex: 1, height: "100%" }}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <CardPost
@@ -51,7 +52,15 @@ const ListPost = ({ datas }) => {
 const indicatorRn = (d) => {
   return (
     <>
-      {d.length == 33 ? null : (
+      {d.length == 33 ? (
+        <View style={{ marginBottom: 20 }}>
+          <Text
+            style={{ alignSelf: "center", fontSize: 18, fontWeight: "700" }}
+          >
+            No hay mas Datos...
+          </Text>
+        </View>
+      ) : (
         <Image
           alignSelf="center"
           h={30}
