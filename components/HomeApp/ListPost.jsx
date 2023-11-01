@@ -6,9 +6,9 @@ const ListPost = ({ datas }) => {
   const [data, setData] = useState([]);
   const [indexPage, setindexPage] = useState(0);
   useEffect(() => {
-    const value = 3 + indexPage;
+    const value = 6 + indexPage;
     const dataArr = datas.slice(0, value);
-    if (data.length == 33) return;
+    if (data.length == 30) return;
     if (data.length == 0) {
       setData(dataArr);
     } else {
@@ -22,7 +22,7 @@ const ListPost = ({ datas }) => {
       {data && data.length > 0 && (
         <FlatList
           data={data}
-          initialNumToRender={5}
+          initialNumToRender={3}
           style={{ flex: 1 }}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
@@ -38,7 +38,7 @@ const ListPost = ({ datas }) => {
               id={item.id}
             />
           )}
-          onEndReached={() => setindexPage((prevent) => prevent + 3)}
+          onEndReached={() => setindexPage((prevent) => prevent + 6)}
           ListFooterComponent={() => indicatorRn(data)}
         />
       )}
@@ -49,7 +49,7 @@ const ListPost = ({ datas }) => {
 const indicatorRn = (d) => {
   return (
     <>
-      {d.length == 33 ? (
+      {d.length == 30 ? (
         <View style={{ marginBottom: 20 }}>
           <Text
             style={{ alignSelf: "center", fontSize: 18, fontWeight: "700" }}

@@ -11,15 +11,11 @@ import HomeProducts from "../../components/Shop/Products/HomeProducts";
 export default function Peoples() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <ScrollView
-        style={{ marginHorizontal: wp(4) }}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-      >
+      <View style={{ marginHorizontal: wp(4) }}>
         <InputSearch />
         <Banner />
         <HomeProducts />
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }

@@ -369,42 +369,6 @@ export default function Feed() {
         "https://images.unsplash.com/photo-1551590192-8070a16d9f67?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fHNlcnZpY2VzfGVufDB8fDB8fHww",
       like: 2694,
     },
-    {
-      id: 7878,
-      name: "Keiner Mesa",
-      date: "Now",
-      descripcion:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis alias maxime suscipit architecto ea? Asperiores, vero nemo?",
-      urlPerfil:
-        "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2dyYW1tZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      urlPost:
-        "https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHJvYm90fGVufDB8fDB8fHww",
-      like: 3247,
-    },
-    {
-      id: 89898,
-      name: "Keiner Mesa",
-      date: "2 days ago",
-      descripcion:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis alias maxime suscipit architecto ea? Asperiores, vero nemo?",
-      urlPerfil:
-        "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2dyYW1tZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      urlPost:
-        "https://images.unsplash.com/photo-1551590192-8070a16d9f67?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fHNlcnZpY2VzfGVufDB8fDB8fHww",
-      like: 2694,
-    },
-    {
-      id: 78546789878,
-      name: "Keiner Mesa",
-      date: "Now",
-      descripcion:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis alias maxime suscipit architecto ea? Asperiores, vero nemo?",
-      urlPerfil:
-        "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2dyYW1tZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      urlPost:
-        "https://images.unsplash.com/photo-1535378620166-273708d44e4c?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHJvYm90fGVufDB8fDB8fHww",
-      like: 3247,
-    },
   ];
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
