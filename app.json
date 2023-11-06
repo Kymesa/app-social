@@ -28,7 +28,13 @@
     },
     "plugins": [
       "expo-router",
-      ["expo-notifications", { "icon": "./assets/notifications-push.png" }]
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notifications-push.png",
+          "sounds": ["./assets/notification.wav"]
+        }
+      ]
     ],
     "scheme": "social-app-movil",
     "extra": {
