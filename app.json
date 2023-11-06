@@ -26,16 +26,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/notifications-push.png",
-          "sounds": ["./assets/notification.wav"]
-        }
-      ]
-    ],
+    "plugins": ["expo-router"],
     "scheme": "social-app-movil",
     "extra": {
       "router": {
