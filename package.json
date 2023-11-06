@@ -38,7 +38,8 @@
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-virtualized-view": "^1.0.0",
     "expo-notifications": "~0.20.1",
-    "expo-device": "~5.4.0"
+    "expo-device": "~5.4.0",
+    "expo-updates": "~0.18.17"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
