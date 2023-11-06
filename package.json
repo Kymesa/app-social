@@ -36,7 +36,9 @@
     "react-native-screens": "~3.22.0",
     "react-native-snap-carousel": "^4.0.0-beta.6",
     "react-native-swipe-gestures": "^1.0.5",
-    "react-native-virtualized-view": "^1.0.0"
+    "react-native-virtualized-view": "^1.0.0",
+    "expo-notifications": "~0.20.1",
+    "expo-device": "~5.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

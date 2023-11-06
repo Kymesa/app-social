@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "725042603470",
+    "project_id": "react-native-notificaciones",
+    "storage_bucket": "react-native-notificaciones.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725042603470:android:d4c4d561469a010f50b79f",
+        "android_client_info": {
+          "package_name": "com.socialappmovil.socialappmovil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpEwDbGSDXAMUvaaPWpCwY1Pibe5dUsQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
